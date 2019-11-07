@@ -4,6 +4,9 @@ bin/
 img/
 data/
 src/core/cosy.fox
+madx-scripts/
+!madx-scripts/*.madx
+!madx-scripts/*.seq
 
 __pycache__/
 
