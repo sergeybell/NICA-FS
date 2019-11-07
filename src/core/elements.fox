@@ -1,0 +1,62 @@
+{I'm taking parameter values from the optim file.}
+{There, the quadrupole grads are given in kGs/cm, so}
+{K1 is in kGs/cm.}
+
+
+INCLUDE 'bin/core/utilities';
+
+PROCEDURE ROTATE PHI;
+  VARIABLE M NM1 4; VARIABLE ANG NM2;
+  VARIABLE i 1;
+  ANG := PHI*DEGRAD;
+  WRITE 6 'ROTATING BY ' PHI;
+  M(1):= COS(ANG)*MAP(1) + SIN(ANG)*MAP(3);
+  M(3):=-SIN(ANG)*MAP(1) + COS(ANG)*MAP(3);
+  M(2):= COS(ANG)*MAP(2) + SIN(ANG)*MAP(4);
+  M(4):=-SIN(ANG)*MAP(2) + COS(ANG)*MAP(4);
+  LOOP i 1 4; MAP(i):=M(i);  ENDLOOP;
+ENDPROCEDURE; {ROTATE}
+
+PROCEDURE QUAD L {m} K1 {Tl/m};
+  {L quadrupole length}
+  {K1 = B_Y/X / (B_0 R) [M^-2]} 
+  VARIABLE K2 1;
+  
+  K2 := K1*10; { in Tesla/meter}
+  
+  MQ L K2*.5 .05;
+ENDPROCEDURE; {QUAD}
+
+PROCEDURE BEND L {cm} K {1/m} A {deg} TILT {deg}; {TILT argument NOT USED yet !!!}
+  {L is the sector bend magnet length}
+  {K is the curvature}
+  {A is the (nominal) rotation angle about the z-axis:}
+  {0 -- B-field aling +x}
+  {90 -- B-field along +y}
+  {180 -- B-field along -x}
+  {-90 -- B-field along -y}
+  {TILT is the extra positioning error}
+  VARIABLE TOF 1; {time-of-flight through the element; evaluated for spin kick}
+  VARIABLE L1 1; {element length in meters}
+  VARIABLE TILT1 1;
+  VARIABLE R1 1; {bend magnet radius}
+  VARIABLE PHI1 1; {bend magnet sector angle}
+  VARIABLE B0 1; {nominal magnet field}
+  VARIABLE WMDM 1; {nominal MDM  spin precession}
+  
+  L1 := L/100;
+  TILT1:=TILT;
+  TOF := L1/CONS(V0);
+  R1 := 1/K;
+  PHI1 := L1/R1;
+
+  B0 := CONS(CHIM)*K;
+  WMDM := Z0/M0*EZERO/AMU*G0*B;
+
+  ROTATE -A;
+  DP R1 PHI1 0.05;
+  ROTATE A;
+  
+ENDPROCEDURE;
+ 
+SAVE 'bin/core/elements';

@@ -1,0 +1,12 @@
+call file = "nica_24sol_rbend.seq";
+
+beam, PARTICLE=ELECTRON, ENERGY=0.11d0, SIGT=1, SIGE=0.001;
+use, sequence=snake;
+
+twiss, save, centre, file=twiss.out;
+
+plot, haxis=s, vaxis=betx,bety,dx;
+survey, file=survey.out;
+
+stop;
+

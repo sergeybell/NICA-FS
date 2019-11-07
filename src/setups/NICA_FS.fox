@@ -1,0 +1,19 @@
+INCLUDE 'bin/core/elements';
+
+PROCEDURE CW_SETUP ;
+  WRITE 6 '********************************************';
+  WRITE 6 '*     FS NICA LATTICE 24 OCT 2019 (CW)     *';
+  WRITE 6 '********************************************';
+
+  UM;
+  {BEGIN LATTICE}
+  DL 5.25;
+  QUAD .65 -.5232;
+  DL .3;
+  QUAD 1.85 .3797;
+  DL .3;
+  QUAD 1.0 -.4141649;
+
+ENDPROCEDURE;
+
+SAVE 'bin/setups/NICA_FS';

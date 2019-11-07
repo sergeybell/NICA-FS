@@ -1,0 +1,12 @@
+.DS_Store
+
+bin/
+img/
+data/
+src/core/cosy.fox
+
+__pycache__/
+
+*.lis
+*.bld
+*~
