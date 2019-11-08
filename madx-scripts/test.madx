@@ -3,21 +3,30 @@ call file = "nica_24sol_rbend.seq";
 deu_mass = 1.8765592; // GeV
 
 beam, PARTICLE=ION, ENERGY=0.270+deu_mass, MASS=deu_mass;
-use, sequence=snake;
+use, sequence=NICA;
 
-twiss, save, centre, file=twiss.out;
+twiss, save, centre, file=tbl/twiss.out;
 
-plot, haxis=s, vaxis=betx,bety,dx,colour=100;
-survey, file=survey.out;
+plot, haxis=s, vaxis=betx,bety,dx,colour=100,file=img/twiss_plot;
+survey, file=tbl/survey.out;
 
-TRACK, file=basis, dump;
+TRACK, file=tbl/basis, onetable, dump;
 START, x=1e-3;
 START, y=1e-3;
-RUN, turns=10;
+RUN, turns=2000;
 ENDTRACK;
 
-PLOT, file=track_plot, table=trackone, trackfile=basis,
-      haxis=turn, vaxis=x,y;
+PLOT, file=img/track_plot, table=trackone, trackfile=tbl/basis, multiple,
+      haxis=turn, vaxis=x, particle=1,2;
+
+PLOT, file=img/track_plot, table=trackone, trackfile=tbl/basis, multiple,
+      haxis=x, vaxis=px, particle=1,2;
+
+PLOT, file=img/track_plot, table=trackone, trackfile=tbl/basis, multiple,
+      haxis=turn, vaxis=y, particle=1,2;
+
+PLOT, file=img/track_plot, table=trackone, trackfile=tbl/basis, multiple,
+      haxis=y, vaxis=py, particle=1,2;
 
 stop;
 
