@@ -1,4 +1,4 @@
-INCLUDE 'bin/core/elements';
+INCLUDE 'bin/elements';
 
 PROCEDURE CW_SETUP ;
   WRITE 6 '********************************************';

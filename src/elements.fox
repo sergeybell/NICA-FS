@@ -3,7 +3,7 @@
 {K1 is in kGs/cm.}
 
 
-INCLUDE 'bin/core/utilities';
+INCLUDE '~/REPOS/COSYINF-CORE/bin/utilities';
 
 PROCEDURE ROTATE PHI;
   VARIABLE M NM1 4; VARIABLE ANG NM2;
@@ -17,17 +17,25 @@ PROCEDURE ROTATE PHI;
   LOOP i 1 4; MAP(i):=M(i);  ENDLOOP;
 ENDPROCEDURE; {ROTATE}
 
-PROCEDURE QUAD L {m} K1 {Tl/m};
+PROCEDURE QUAD L {m} K1 {m^-2} ;
   {L quadrupole length}
-  {K1 = B_Y/X / (B_0 R) [M^-2]} 
-  VARIABLE K2 1;
+  {K1 = B_Y/X / (B_0 R) [m^-2]}
+      {COSY wants magnetic induction at the pole,}
+      {which is B_y(a) = B*\rho*K_1*a, a = aperture}
+      {checked with Optim; there K1 is Tl/m (not normalized by B\rho}
+      {hence B_y(a) = K1 * a in the automatic converter}
+  VARIABLE Bpt 1; {magnetic induction (flux density @ pole tip}
+  VARIABLE A 1; {aperture}
+
+  A:=1;
+  WRITE 6 'CHIM = ' CHIM;
   
-  K2 := K1*10; { in Tesla/meter}
+  Bpt := K1*CONS(CHIM)*A; {in Tesla}
   
-  MQ L K2*.5 .05;
+  MQ L Bpt A;
 ENDPROCEDURE; {QUAD}
 
-PROCEDURE BEND L {cm} K {1/m} A {deg} TILT {deg}; {TILT argument NOT USED yet !!!}
+PROCEDURE RBEND L {cm} K {1/m};
   {L is the sector bend magnet length}
   {K is the curvature}
   {A is the (nominal) rotation angle about the z-axis:}
@@ -36,27 +44,9 @@ PROCEDURE BEND L {cm} K {1/m} A {deg} TILT {deg}; {TILT argument NOT USED yet !!
   {180 -- B-field along -x}
   {-90 -- B-field along -y}
   {TILT is the extra positioning error}
-  VARIABLE TOF 1; {time-of-flight through the element; evaluated for spin kick}
-  VARIABLE L1 1; {element length in meters}
-  VARIABLE TILT1 1;
-  VARIABLE R1 1; {bend magnet radius}
-  VARIABLE PHI1 1; {bend magnet sector angle}
-  VARIABLE B0 1; {nominal magnet field}
-  VARIABLE WMDM 1; {nominal MDM  spin precession}
-  
-  L1 := L/100;
-  TILT1:=TILT;
-  TOF := L1/CONS(V0);
-  R1 := 1/K;
-  PHI1 := L1/R1;
+  VARIABLE X 1;
+  X := 1;
 
-  B0 := CONS(CHIM)*K;
-  WMDM := Z0/M0*EZERO/AMU*G0*B;
-
-  ROTATE -A;
-  DP R1 PHI1 0.05;
-  ROTATE A;
-  
 ENDPROCEDURE;
  
-SAVE 'bin/core/elements';
+SAVE 'bin/elements';
