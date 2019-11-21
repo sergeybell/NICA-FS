@@ -213,22 +213,6 @@ PROCEDURE TREL MAPARR SPNRARR NEL NTRN PRAYOU PSPIOU;
       WRITE PSPIOU STR ;
     ENDLOOP ;
   ENDPROCEDURE; {WTRPSPI}
-  CR;
-  {the following three rays mimic the reference particle}
-  SR 1e-9 0 0 0 0 0 0 0 2; SSR 0 0 1;
-  SR 0 0 1e-9 0 0 0 0 0 2; SSR 0 0 1;
-  SR 0 0 0 0 0 1e-9 0 0 2; SSR 0 0 1;
-  {these define beam boundaries}
-  {(useful for determining difference statistics' baoundaries)}
-  SR 3e-3 0 0 0 0 0 0 0 2; SSR 0 0 1;
-  SR 0 0 3e-3 0 0 0 0 0 2; SSR 0 0 1;
-  SR 0 0 0 0 0 1e-4 0 0 2; SSR 0 0 1;
-  {spin offset rays}
-  LOOP I 1 11;
-    DUM := .1*(I - 6);
-    SR 1e-9 0 0 0 0 0 0 0 2; SSR DUM 0   SQRT(1-DUM*DUM);
-    SR 1e-9 0 0 0 0 0 0 0 2; SSR 0   DUM SQRT(1-DUM*DUM);
-  ENDLOOP;
 
   TRR 1; {enable resuming mode for element-by element tracking}
   LTRPRAY := 0; LTRPSPI := 0; { make sure that TR doesn't output data on its own}
