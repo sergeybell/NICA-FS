@@ -1,13 +1,13 @@
-
+CORE-DIR= $(HOME)/REPOS/COSYINF-CORE
 CORE = cosy.bin utilities.bin elements.bin
 SETUPS = $(addsuffix .bin, NICA_FS)
-SUPPORT = # BNL/decoh_optim.bin EB/decoh_optim.bin
+SUPPORT = 
 
 define RM
 	find $(1) -type f -name $(2) -print -delete
 endef
 
-core.bld: $(addprefix bin/core/, $(CORE))
+core.bld: $(addprefix $(CORE-DIR)/bin/, cosy.bin utilities.bin) bin/elements.bin
 	echo $(CORE) >> core.bld
 
 setups.bld: $(addprefix bin/setups/, $(SETUPS)) core.bld
@@ -16,14 +16,14 @@ setups.bld: $(addprefix bin/setups/, $(SETUPS)) core.bld
 support.bld: $(addprefix bin/support/, $(SUPPORT)) setups.bld
 	echo $(SUPPORT) >> support.bld
 
-bin/core/cosy.bin: src/core/cosy.fox ;
+$(CORE-DIR)/bin/cosy.bin: $(CORE-DIR)/src/cosy.fox ;
 	cosy $<;
-bin/core/utilities.bin: src/core/utilities.fox bin/core/cosy.bin 
+$(CORE-DIR)/bin/utilities.bin: $(CORE-DIR)/src/utilities.fox $(CORE-DIR)/bin/cosy.bin 
 	cosy $<;
-bin/core/elements.bin: src/core/elements.fox bin/core/utilities.bin 
+bin/elements.bin: src/elements.fox $(CORE-DIR)/bin/utilities.bin 
 	cosy $<;
 
-bin/setups/%.bin: src/setups/%.fox bin/core/elements.bin 
+bin/setups/%.bin: src/setups/%.fox bin/elements.bin 
 	cosy $<;
 bin/support/%.bin: src/support/%.fox setups.bld
 	cosy $<;
