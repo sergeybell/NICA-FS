@@ -11,7 +11,9 @@ dat.shape = (-1, nray)
 
 fig, ax = plt.subplots(2,1, sharex=True)
 df = dat[:, 19:]
-ax[0].plot(df['EID'][:19], df['X'][:19])
+ax[0].plot(#df['EID'][:19],
+               df['X'][:19])
 ax[0].set_xlabel('EID'); ax[0].set_ylabel('X')
-ax[1].plot(df['EID'][:19], df['Y'][:19])
+ax[1].plot(#df['EID'][:19],
+               df['Y'][:19])
 ax[1].set_xlabel('EID'); ax[1].set_ylabel('Y')
