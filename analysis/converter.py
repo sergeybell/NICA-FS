@@ -1,11 +1,11 @@
 HOME = '/Users/alexaksentyev/REPOS/NICA-FS/'
 
 el_dict = {
-    'DRIFT': 'DL',
-    'QUADRUPOLE': 'QUAD',
-    'SBEND': 'SBEND',
-    'RBEND': 'RBEND',
-    'SOLENOID': 'SOLENOID'
+    'DRIFT': ('DL', 1),
+    'QUADRUPOLE': ('QUAD', 2),
+    'SBEND': ('SBEND', 3),
+    'RBEND': ('RBEND', 3),
+    'SOLENOID': ('SOLENOID',2)
     }
 
 
@@ -16,7 +16,10 @@ with open(HOME+'madx-scripts/nica_24sol_rbend.seq', 'r') as fin:
             com, elem = line.split(sep='\t')
             com = com.strip(':')
             elem = elem.strip(';\n').split(',')
-            out_string = el_dict[elem[0]] + ' '
+            elem_name, n_arg = el_dict[elem[0]]
+            n_zeros = n_arg-len(elem[1:])
+            elem.extend(['name=0' for i in range(n_zeros)])
+            out_string = el_dict[elem[0]][0] + ' '
             for par in elem[1:]:
                 par_val = par.split('=')[1]
                 if (par_val.find('+',1)>0 or par_val.find('-',1)>0):
