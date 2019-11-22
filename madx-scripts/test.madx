@@ -1,32 +1,37 @@
-call file = "nica_24sol_rbend.seq";
+call file = "test.seq";
 
 deu_mass = 1.8765592; // GeV
 
 beam, PARTICLE=ION, ENERGY=0.270+deu_mass, MASS=deu_mass;
-use, sequence=NICA;
+use, sequence=lineS;
 
-twiss, save, centre, file=tbl/twiss.out;
+! twiss, save, centre, file=tbl/twiss.out; 
 
-plot, haxis=s, vaxis=betx,bety,dx,colour=100,file=img/twiss_plot;
-survey, file=tbl/survey.out;
+! plot, haxis=s, vaxis=betx,bety,dx,colour=100, style=100,file=img/twiss_plot;
+! survey, file=tbl/survey.out;
 
 TRACK, file=tbl/basis, onetable, dump;
+OBSERVE, place=DL1;
+OBSERVE, place=TBs;
+OBSERVE, place=DL2;
 START, x=1e-3;
+START, x=.8e-3;
 START, y=1e-3;
-RUN, turns=2000;
+START, y=.8e-3;
+RUN, turns=100, ffile=1;
 ENDTRACK;
 
 PLOT, file=img/track_plot, table=trackone, trackfile=tbl/basis, multiple,
-      haxis=turn, vaxis=x, particle=1,2;
+      haxis=turn, vaxis=x, particle=1,3;
 
 PLOT, file=img/track_plot, table=trackone, trackfile=tbl/basis, multiple,
-      haxis=x, vaxis=px, particle=1,2;
+      haxis=x, vaxis=px, particle=1,3;
 
 PLOT, file=img/track_plot, table=trackone, trackfile=tbl/basis, multiple,
-      haxis=turn, vaxis=y, particle=1,2;
+      haxis=turn, vaxis=y, particle=1,3;
 
 PLOT, file=img/track_plot, table=trackone, trackfile=tbl/basis, multiple,
-      haxis=y, vaxis=py, particle=1,2;
+      haxis=y, vaxis=py, particle=1,3;
 
 stop;
 
