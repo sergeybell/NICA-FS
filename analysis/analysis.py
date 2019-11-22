@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt; plt.ion()
 
-case = ('trel', 'ps')
+case = ('tr', 'ps')
 
 filename = {'ps':'TRPRAY', 'sp':'TRPSPI'}
 HOME = '/Users/alexaksentyev/REPOS/NICA-FS/'
@@ -18,18 +18,11 @@ nray = dat['PID'].max() + 1
 dat.shape = (-1, nray)
 
 
-n=30
+n=-1
 pref = {'ps':'', 'sp':'S_'}
 fig, ax = plt.subplots(2,1, sharex=True)
 df = dat[:, 17:]
-ax[0].plot(#df['EID'][:19],
-               df[pref[case[1]]+'X'][:n])
-#ax[0].set_xlabel('EID');
+ax[0].plot(df[pref[case[1]]+'X'][:n])
 ax[0].set_ylabel(pref[case[1]]+'X')
-ax[1].plot(#df['EID'][:19],
-               df[pref[case[1]]+'Y'][:n])
-#ax[1].set_xlabel('EID');
+ax[1].plot(df[pref[case[1]]+'Y'][:n])
 ax[1].set_ylabel(pref[case[1]]+'Y')
-# fig, ax = plt.subplots(2,1)
-# ax[0].plot(df['X'][:n], df['A'][:n], '.')
-# ax[1].plot(df['Y'][:n], df['B'][:n], '.')

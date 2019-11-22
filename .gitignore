@@ -1,9 +1,9 @@
 .DS_Store
+RKLOG.DAT
 
 bin/
 img/
 data/
-src/core/cosy.fox
 madx-scripts/
 !madx-scripts/*.madx
 !madx-scripts/*.seq
