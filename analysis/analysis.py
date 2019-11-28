@@ -1,32 +1,46 @@
 import numpy as np
 import matplotlib.pyplot as plt; plt.ion()
 
-case = ('trel', 'sp')
+def plot_sp(ray):
+    fig, ax = plt.subplots(3,1,sharex=True)
+    ax[0].plot(ray['S_X']); ax[0].set_ylabel('S_X')
+    ax[1].plot(ray['S_Y']); ax[1].set_ylabel('S_Y')
+    ax[2].plot(ray['S_Z']); ax[2].set_ylabel('S_Z')
 
-filename = {'ps':'TRPRAY', 'sp':'TRPSPI'}
+    fig, ax = plt.subplots(2,1, sharex=True)
+    ax[0].plot(ray['S_Z'], ray['S_X'])
+    ax[0].set_ylabel('S_X')
+    ax[1].plot(ray['S_Z'], ray['S_Y'])
+    ax[1].set_ylabel('S_Y')
+    ax[1].set_xlabel('S_Z')
+
+def plot_ps(ray):
+    fix, ax = plt.subplots(2,1,sharex=True)
+    ax[0].plot(ray['X']); ax[0].set_ylabel('X')
+    ax[1].plot(ray['Y']); ax[1].set_ylabel('Y')
+    ax[1].set_xlabel('turn')
+
+case = 'tr'
+
 HOME = '/Users/alexaksentyev/REPOS/NICA-FS/'
 VARS = {
     'ps': list(zip(['X','A','Y','B','T','D'], [float]*6)),
     'sp': list(zip(['S_X','S_Y','S_Z'], [float]*3))
     }
 d_type = {
-    'trel': list(zip(['iteration','EID', 'PID'], [int]*3)) + VARS[case[1]],
-    'tr': list(zip(['turn', 'PID'], [int]*2)) + VARS[case[1]]
+    'trel': lambda case: list(zip(['iteration','EID', 'PID'], [int]*3)) + VARS[case],
+    'tr': lambda case: list(zip(['turn', 'PID'], [int]*2)) + VARS[case]
     }
-dat = np.loadtxt(HOME+'data/TEST/{}:{}.dat'.format(filename[case[1]], case[0].upper()), d_type[case[0]], skiprows=2)
-nray = dat['PID'].max() + 1
-dat.shape = (-1, nray)
+    
+dat = {
+    'sp' : np.loadtxt(HOME+'data/TEST/TRPSPI:{}.dat'.format(case.upper()), d_type[case]('sp'), skiprows=2),
+    'ps': np.loadtxt(HOME+'data/TEST/TRPRAY:{}.dat'.format(case.upper()), d_type[case]('ps'), skiprows=2)
+    }
+nray = dat['sp']['PID'].max() + 1
+for el in ['ps','sp']:
+    dat[el].shape = (-1, nray)
+    dat[el] = dat[el][:,1:]
 
-dat = dat[:,1:]
-ray = dat[:,2]
-fig, ax = plt.subplots(3,1,sharex=True)
-ax[0].plot(ray['S_X']); ax[0].set_ylabel('S_X')
-ax[1].plot(ray['S_Y']); ax[1].set_ylabel('S_Y')
-ax[2].plot(ray['S_Z']); ax[2].set_ylabel('S_Z')
+ray = {el : dat[el][:,5] for el in ['ps','sp']}
 
-fig, ax = plt.subplots(2,1, sharex=True)
-ax[0].plot(ray['S_X'], ray['S_Z'])
-ax[0].set_ylabel('S_Z')
-ax[1].plot(ray['S_X'], ray['S_Y'])
-ax[1].set_ylabel('S_Y')
-ax[1].set_xlabel('S_X')
+    
