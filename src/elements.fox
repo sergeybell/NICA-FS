@@ -1,7 +1,3 @@
-{I'm taking parameter values from the optim file.}
-{There, the quadrupole grads are given in kGs/cm, so}
-{K1 is in kGs/cm.}
-
 
 INCLUDE '~/REPOS/COSYINF-CORE/bin/utilities';
 
@@ -15,6 +11,7 @@ PROCEDURE ROTATE PHI;
   M(2):= COS(ANG)*MAP(2) + SIN(ANG)*MAP(4);
   M(4):=-SIN(ANG)*MAP(2) + COS(ANG)*MAP(4);
   LOOP i 1 4; MAP(i):=M(i);  ENDLOOP;
+  RSA PHI;
 ENDPROCEDURE; {ROTATE}
 
 PROCEDURE QUAD L {m} K1 {m^-2} ;
@@ -22,9 +19,9 @@ PROCEDURE QUAD L {m} K1 {m^-2} ;
   {K1 = B_Y/X / (B_0 R) [m^-2]}
       {COSY wants magnetic induction at the pole,}
       {which is B_y(a) = B*\rho*K_1*a, a = aperture}
-      {checked with Optim; there K1 is Tl/m (not normalized by B\rho}
+      {checked with Optim; there K1 is Tl/m (not normalized by B\rho)}
       {hence B_y(a) = K1 * a in the automatic converter}
-  VARIABLE Bpt 1; {magnetic induction (flux density @ pole tip}
+  VARIABLE Bpt 1; {magnetic induction (flux density @ pole tip)}
   VARIABLE A 1; {aperture}
 
   A:=1;
@@ -45,10 +42,17 @@ ENDPROCEDURE; {SBEND}
 
 PROCEDURE RBEND L ANGLE TILT;
   VARIABLE R 1;
+    {all this is unneeded b/c I now just rotate the SPNR matrix}
+    {together with the orbital transfer map}
+    {by TILT}
+    { VARIABLE GAMMA NM1; VARIABLE PHIS NM1; }
+    { GAMMA := 1 + E0/(M0*AMUMEV); }
+    { PHIS := GAMMA*G0*ANGLE; WRITE 6 'PHI SPIN' PHIS; }
   R := L/(ANGLE*DEGRAD);
   ROTATE TILT;
     DP R ANGLE .1;
   ROTATE -TILT;
+  WRITE 6 'ORTHOGONALITY ERROR' OE(SPNR);
 ENDPROCEDURE; {RBEND}
 
 PROCEDURE SOLENOID L {m} KS {rad/m};

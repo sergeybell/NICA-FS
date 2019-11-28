@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt; plt.ion()
 
-case = ('tr', 'ps')
+case = ('trel', 'sp')
 
 filename = {'ps':'TRPRAY', 'sp':'TRPSPI'}
 HOME = '/Users/alexaksentyev/REPOS/NICA-FS/'
@@ -17,12 +17,16 @@ dat = np.loadtxt(HOME+'data/TEST/{}:{}.dat'.format(filename[case[1]], case[0].up
 nray = dat['PID'].max() + 1
 dat.shape = (-1, nray)
 
+dat = dat[:,1:]
+ray = dat[:,2]
+fig, ax = plt.subplots(3,1,sharex=True)
+ax[0].plot(ray['S_X']); ax[0].set_ylabel('S_X')
+ax[1].plot(ray['S_Y']); ax[1].set_ylabel('S_Y')
+ax[2].plot(ray['S_Z']); ax[2].set_ylabel('S_Z')
 
-n=-1
-pref = {'ps':'', 'sp':'S_'}
 fig, ax = plt.subplots(2,1, sharex=True)
-df = dat[:, 17:]
-ax[0].plot(df[pref[case[1]]+'X'][:n])
-ax[0].set_ylabel(pref[case[1]]+'X')
-ax[1].plot(df[pref[case[1]]+'Y'][:n])
-ax[1].set_ylabel(pref[case[1]]+'Y')
+ax[0].plot(ray['S_X'], ray['S_Z'])
+ax[0].set_ylabel('S_Z')
+ax[1].plot(ray['S_X'], ray['S_Y'])
+ax[1].set_ylabel('S_Y')
+ax[1].set_xlabel('S_X')
