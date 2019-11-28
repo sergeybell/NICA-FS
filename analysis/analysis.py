@@ -20,7 +20,9 @@ def plot_ps(ray):
     ax[1].plot(ray['Y']); ax[1].set_ylabel('Y')
     ax[1].set_xlabel('turn')
 
-case = 'tr'
+case = 'trel'
+
+plot = {'ps': lambda ray: plot_ps(ray), 'sp': lambda ray: plot_sp(ray)}
 
 HOME = '/Users/alexaksentyev/REPOS/NICA-FS/'
 VARS = {
@@ -43,4 +45,4 @@ for el in ['ps','sp']:
 
 ray = {el : dat[el][:,5] for el in ['ps','sp']}
 
-    
+plot['sp'](dat['sp'][:,0])
