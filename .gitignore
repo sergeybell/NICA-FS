@@ -4,7 +4,7 @@ RKLOG.DAT
 bin/
 img/
 data/
-madx-scripts/
+madx-scripts/*
 !madx-scripts/*.madx
 !madx-scripts/*.seq
 

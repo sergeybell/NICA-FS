@@ -1,0 +1,11 @@
+DL1: Drift, L=1;
+DL2: Drift, L=1;
+TBr: RBEND, L=1, ANGLE=PI/2, TILT=PI/2;
+TBs: SBEND, L=1, ANGLE=PI/2, TILT=PI/2;
+MQ1: Quadrupole, L=.1, K1:=a;
+MQ2: Quadrupole, L=.1, K1:=b;
+
+TLT: LINE=();
+
+lineR: LINE=(DL1, TBr, DL2);
+lineS: LINE=(DL1, TBs, DL2);
