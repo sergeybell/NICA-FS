@@ -16,6 +16,10 @@ def update(index, S_X, S_Y, S_Z):
 
 ##
 
+def svec(r):
+    a = [r['S_X'], r['S_Y'], r['S_Z']]
+    return np.array(a)
+
 def plot_sp(ray):
     rng = {lbl: 1#ray[lbl].max() - ray[lbl].min()
                for lbl in ['S_X','S_Y','S_Z']}
@@ -43,7 +47,7 @@ def plot_sp(ray):
 def plot_ps(ray):
     fix, ax = plt.subplots(2,1,sharex=True)
     ax[0].plot(ray['EID'], ray['X']); ax[0].set_ylabel('X')
-    ax[1].plot(eay['EID'], ray['Y']); ax[1].set_ylabel('Y')
+    ax[1].plot(ray['EID'], ray['Y']); ax[1].set_ylabel('Y')
     ax[1].set_xlabel('EID')
 
 case = 'trel'
@@ -71,9 +75,13 @@ for el in ['ps','sp']:
     dat[el].shape = (-1, nray)
     dat[el] = dat[el][:,1:]
 
-plot['sp'](dat['sp'][:,4])
 
-ray = {el : dat[el][:,1] for el in ['ps','sp']}
+pid = 0
+plot['sp'](dat['sp'][:,pid])
+
+
+## animation of a particle's spin vector evolution
+ray = {el : dat[el][:,pid] for el in ['ps','sp']}
 S_X = ray['sp']['S_X']
 S_Y = ray['sp']['S_Y']
 S_Z = ray['sp']['S_Z']
