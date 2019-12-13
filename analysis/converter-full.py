@@ -1,6 +1,9 @@
 import re
 
 HOME = '/Users/alexaksentyev/REPOS/NICA-FS/'
+INFILE = 'madx-scripts/NICA_full.seq'
+OUTFILE = 'NICA_full.fox'
+
 
 el_dict = {
     'MONITOR': ('DL', 1),
@@ -67,7 +70,7 @@ def identify_mult(lbl, element):
         # change the array of values to the last value (all others are 0 anyway)
         element = re.sub('KNL='+arr_str, 'ARR={}, NARR={}'.format(arr_name, narr_name), element)
         # create variable declarations
-        var_dclr.append('{0} 1 {1}; {2} 1;\n'.format(arr_name, len(arr), narr_name))
+        var_dclr.append('VARIABLE {0} 1 {1}; VARIABLE {2} 1;\n'.format(arr_name, len(arr), narr_name))
         for i, val in enumerate(arr): # create array variable definition
             var_def.append('{}({}) := {};\n'.format(arr_name, i+1, val))
         var_def.append('{} := {};\n'.format(narr_name, i+1))
@@ -110,8 +113,8 @@ def write_file(line, fout):
         out_line = lbl_dict[element]
         fout.write(out_line)
 
-fout = open(HOME+'src/setups/NICA_full.fox','w')
-with open(HOME+'madx-scripts/NICA_full.seq', 'r') as fin:
+fout = open(HOME+OUTFILE,'w')
+with open(HOME+INFILE, 'r') as fin:
     for cnt, line in enumerate(fin):
         if cnt<6:
             pass
@@ -132,7 +135,7 @@ with open(HOME+'madx-scripts/NICA_full.seq', 'r') as fin:
 
 fout.close()
 
-with open(HOME+'src/setups/NICA_full.fox','r+') as fout:
+with open(HOME+OUTFILE,'r+') as fout:
     content = fout.read()
     write_header(fout)
     fout.write(content)
