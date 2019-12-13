@@ -13,7 +13,11 @@ PROCEDURE ROTATE PHI;
   RSA PHI;
 ENDPROCEDURE; {ROTATE}
 
-PROCEDURE QUAD L {m} K1 {m^-2} ;
+FUNCTION BMULT KNL L; {COMPUTES MAGNETIC INDUCTION FOR A MADX MULTIPOLE ELEMENT}
+  BMULT := KNL/L * CONS(CHIM);
+ENDFUNCTION; {BMULT}
+
+PROCEDURE QUAD L {m} TILT {rad} K1 {m^-2} ;
   {L quadrupole length}
   {K1 = B_Y/X / (B_0 R) [m^-2]}
       {COSY wants magnetic induction at the pole,}
@@ -22,14 +26,33 @@ PROCEDURE QUAD L {m} K1 {m^-2} ;
       {hence B_y(a) = K1 * a in the automatic converter}
   VARIABLE Bpt 1; {magnetic induction (flux density @ pole tip)}
   VARIABLE A 1; {aperture}
-
-  A:=1;
-  { WRITE 6 'CHIM = ' CHIM; }
-  
+  A:=1;  
   Bpt := K1*CONS(CHIM)*A; {in Tesla}
-  
   MQ L Bpt A;
 ENDPROCEDURE; {QUAD}
+
+PROCEDURE SEXT L {m} TILT {rad} KNL {unit};
+  VARIABLE Bpt 1;
+  VARIABLE L0 1;
+  Bpt := BMULT(KNL, L);
+  MH L Bpt 1;
+ENDPROCEDURE; {SEXT}
+
+PROCEDURE OCT L {m} TILT {rad} KNL {unit};
+  VARIABLE Bpt 1;
+  Bpt := BMULT(KNL, L);
+  MO L Bpt 1;
+ENDPROCEDURE; {OCT}
+
+PROCEDURE MULT TILT {rad} KNL {unit} N;
+  VARIABLE Bpt N; VARIABLE I 1;
+  VARIABLE L0 1;
+  L0 := .1;
+  LOOP I 1 N;
+    Bpt(I) := BMULT(KNL(I), L0);
+  ENDLOOP;
+  MM L0 Bpt N 1;
+ENDPROCEDURE;
 
 PROCEDURE SBEND L {m} ANGLE {rad} TILT {rad};
   VARIABLE R 1; VARIABLE ANGLE0 1; VARIABLE TILT0 1;
@@ -63,5 +86,6 @@ PROCEDURE SOLENOID L {m} KS {rad/m};
   B0 := KS * CONS(CHIM);
   CMS B0 A L;
 ENDPROCEDURE; {SOLENOID}
+
  
 SAVE 'bin/elements';
