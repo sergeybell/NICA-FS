@@ -4,11 +4,9 @@
 !  BetaX=0.6 m,  AlphaX=0,  BetaY=0.6 m,  AlphaY=0 
 !  DispX=0 m,  DispPX=0,  DispY=0 m,  DispPY=0 
 
-HD: MONITOR ;
-MB2L: MULTIPOLE,  KNL:={0,0,0.05750859885};
-BH: SBEND,  L=      1.94,  ANGLE=0.07853981634   
-    ,  E1=0.03926990817 ,  HGAP=0.03586152553, FINT=0.5   
-    ,  E2=0.03926990817 ,  HGAP=0.03586152553, FINTX=0.5;
+HD:	    MONITOR ;
+MB2L:	    MULTIPOLE,  KNL:={0,0,0.05750859885};
+BH: 	    SBEND,  L=      1.94,  ANGLE=0.07853981634, E1=0.03926990817,  HGAP=0.03586152553, FINT=0.5,  E2=0.03926990817 ,  HGAP=0.03586152553, FINTX=0.5;
 OQLBM: 		DRIFT, L=     0.665 ;
 OBMBM: 		DRIFT, L=       0.3 ;
 OBMMC: 		DRIFT, L=     0.289 ;
@@ -101,7 +99,7 @@ Q35E2: 		QUADRUPOLE,  L=      0.54,  K1=-0.5165568535;
 QFF3E: 		QUADRUPOLE,  L=      0.68,  K1=0.4318898134;
 QFF2E: 		QUADRUPOLE,  L=      1.42,  K1=-0.4317078362;
 QFF1E: 		QUADRUPOLE,  L=      0.95,  K1=0.4310053185;
-KX:  		kicker, L=       0.3, hkick=         0, vkick=         0;
+KX:  		KICKER, L=       0.3, HKICK=         0, VKICK=         0;
 MCQ: 		MULTIPOLE,  KNL:={0,         0};
 MCS0: 		MULTIPOLE,  KNL:={0,0,         0};
 MCS1: 		MULTIPOLE,  KNL:={0,0,0.3087707802};
