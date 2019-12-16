@@ -2,7 +2,7 @@ import re
 
 HOME = '/Users/alexaksentyev/REPOS/NICA-FS/'
 INFILE = 'madx-scripts/NICA_full.seq'
-OUTFILE = 'NICA_full.fox'
+OUTFILE = 'src/setups/NICA_full.fox'
 
 
 el_dict = {
@@ -11,7 +11,7 @@ el_dict = {
     'QUADRUPOLE': ('QUAD', 3),
     'SEXTUPOLE': ('SEXT', 3),
     'OCTUPOLE': ('OCT', 3),
-    'SBEND': ('SBEND', 3),
+    'SBEND': ('SBEND', 9),
     'RBEND': ('RBEND', 3),
     'SOLENOID': ('SOLENOID',2),
     'MULTIPOLE': ('MULT', 3),
@@ -24,7 +24,8 @@ var_def = []
 
 argpos_dict = {
     'SEXT': {'TILT': 1, 'KNL':2},
-    'SBEND': {'L':1, 'ANGLE':2, 'TILT':3, 'E1':4,'E2':5, 'FINT':6, 'FINTX':7, 'HGAP':8},
+    'SBEND': {'L':1, 'ANGLE':2, 'TILT':3, 'E1':4,'H1':5, 'E2':6, 'H2':7, 'FINT':8, 'FINTX':9},
+    'RBEND': {'L':1, 'ANGLE':2, 'TILT':3},
     'DL': {'L':1},
     'QUAD': {'L':1, 'TILT':2, 'K1':3, 'KNL':3},
     'SEXT': {'L':1, 'TILT':2, 'KNL':3},
@@ -116,16 +117,16 @@ def write_file(line, fout):
 fout = open(HOME+OUTFILE,'w')
 with open(HOME+INFILE, 'r') as fin:
     for cnt, line in enumerate(fin):
-        if cnt<6:
+        if cnt<6: # 0
             pass
-        elif cnt<138:
+        elif cnt<138: # 471
             print(cnt)
             write_dict(line)
-        elif cnt<143:
+        elif cnt<143: # 472
             print('++', cnt)
             print(line)
             pass
-        elif cnt>142:
+        elif cnt>142: # 472
             print('##',cnt)
             print(line)
             if (line[0]!='\n' and line[0]!='/'):
