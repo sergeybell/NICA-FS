@@ -28,13 +28,13 @@ def plot_sp(ray):
     var = ['S_X','S_Y','S_Z']
     fig, ax = plt.subplots(3,1,sharex=True)
     for i, lbl in enumerate(var):
-        ax[i].plot(ray['EID'], np.divide(ray[lbl]-mn[lbl], rng[lbl],
+        ax[i].plot(ray['turn'], np.divide(ray[lbl]-mn[lbl], rng[lbl],
                                              where=rng[lbl]!=0,
                                              out=ray[lbl]-mn[lbl]));
         ax[i].set_ylabel(lbl)
         ax[i].xaxis.grid()
-    ax[2].set_xlabel('EID')
-    plt.xticks(ticks=ray['EID'], labels=NICA_EL_LBLS[ray['EID']], rotation=45)
+    ax[2].set_xlabel('turn')
+    # plt.xticks(ticks=ray['EID'], labels=NICA_EL_LBLS[ray['EID']], rotation=45)
 
     fig, ax = plt.subplots(3,1)
     ax[0].plot(ray['S_Z'], ray['S_X'])
@@ -46,11 +46,11 @@ def plot_sp(ray):
 
 def plot_ps(ray):
     fix, ax = plt.subplots(2,1,sharex=True)
-    ax[0].plot(ray['EID'], ray['X']); ax[0].set_ylabel('X')
-    ax[1].plot(ray['EID'], ray['Y']); ax[1].set_ylabel('Y')
-    ax[1].set_xlabel('EID')
+    ax[0].plot(ray['turn'], ray['X']); ax[0].set_ylabel('X')
+    ax[1].plot(ray['turn'], ray['Y']); ax[1].set_ylabel('Y')
+    ax[1].set_xlabel('turn')
 
-case = 'trel'
+case = 'tr'
 
 plot = {'ps': lambda ray: plot_ps(ray), 'sp': lambda ray: plot_sp(ray)}
 
