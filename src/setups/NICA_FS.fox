@@ -3,7 +3,7 @@ INCLUDE 'bin/elements';
 PROCEDURE BENDS24_SETUP HZ1 HZ2 KZ1 KZ2 QF QD;
 
   WRITE 6 '********************************************';
-  WRITE 6 '*     FS NICA LATTICE 24 OCT 2019 (CW)     *';
+  WRITE 6 '*     FS NICA BENDS24 24 OCT 2019 (CW)     *';
   WRITE 6 '********************************************';
 
   UM;
@@ -226,17 +226,17 @@ PROCEDURE BENDS24_SETUP HZ1 HZ2 KZ1 KZ2 QF QD;
   DL 0.1 ; {Drift_216}
   QUAD 0.47 0 -0.3128158304 ; {Quadr_217}
   DL 0.2 ; {Drift_218}
-  SOLENOID 0.7 HZ2 ; {Solen_219}
+  SOLENOID 0.7 HZ2 ; {Solen_219} {11th snake solenoid (?)}
   DL 8.0045 ; {Drift_220}
-  SOLENOID 0.7 (HZ2+Kz1) ; {Solen_221}
+  SOLENOID 0.7 (HZ2+Kz1) ; {Solen_221} {1st SPIN NAVIGATOR solenoid (combined w/last snake solenoid)}
   DL 0.2 ; {Drift_222}
   SBEND 1.370459105 0.039984488639998664 -PI/2 0 0 0 0 0 0 ; {SBend_223}
   DL 0.2 ; {Drift_224}
-  SOLENOID 0.4 -Kz2 ; {Solen_225}
+  SOLENOID 0.4 -Kz2 ; {Solen_225} {2nd SPIN NAVIGATOR solenoid}
   DL 2.02954 ; {Drift_226}
   SBEND 1.370459105 0.039984488639998664 PI/2 0 0 0 0 0 0 ; {SBend_227}
   DL 0.2 ; {Drift_228}
-  DL 0.47 ; {Drift_229}
+  DL 0.47 ; {Drift_229} {this is MPD}
   DL 0.1 ; {Drift_230}
   QUAD 1. 0 0.4158533601 ; {Quadr_231}
   DL 0.3 ; {Drift_232}
@@ -628,7 +628,7 @@ PROCEDURE FULL_SETUP;
   {________________________________________________________________________________}
 
   WRITE 6 '********************************************';
-  WRITE 6 '*     FS NICA LATTICE 13 DEC 2019 (CW)     *';
+  WRITE 6 '*     FS NICA FULL SETUP 13 DEC 2019 (CW)     *';
   WRITE 6 '********************************************';
 
   UM;
