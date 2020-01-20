@@ -46,12 +46,15 @@ ENDPROCEDURE; {OCT}
 
 PROCEDURE MULT TILT {rad} KNL {unit} N;
   VARIABLE Bpt 1 N; VARIABLE I 1;
-  VARIABLE L0 1;
+  VARIABLE L0 1; VARIABLE FLAG 1; {used to check magnetic field components against 0}
   L0 := .1;
   LOOP I 1 N;
     Bpt(I) := BMULT(KNL(I), L0);
+    IF Bpt(I)#0; FLAG:=1; ENDIF;
   ENDLOOP;
-  MM L0 Bpt N 1;
+  IF FLAG#0; MM L0 Bpt N 1;
+  ELSEIF TRUE; DL L0;
+  ENDIF;
 ENDPROCEDURE;
 
 PROCEDURE SBEND L {m} ANGLE {rad} TILT {rad} E1 {rad} H1 {1/m} E2 {rad} H2{1/m} FINT {unit} FINTX {unit};
