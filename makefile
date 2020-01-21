@@ -1,7 +1,7 @@
 CORE-DIR= $(HOME)/REPOS/COSYINF-CORE
 CORE = cosy.bin utilities.bin elements.bin
 SETUPS = $(addsuffix .bin, NICA_FS)
-SUPPORT = 
+SUPPORT = support.bin
 
 define RM
 	find $(1) -type f -name $(2) -print -delete
