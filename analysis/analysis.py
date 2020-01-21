@@ -28,13 +28,18 @@ def plot_sp(ray):
     var = ['S_X','S_Y','S_Z']
     fig, ax = plt.subplots(3,1,sharex=True)
     for i, lbl in enumerate(var):
-        ax[i].plot(ray['turn'], np.divide(ray[lbl]-mn[lbl], rng[lbl],
+        ax[i].plot(ray[xlab[case]], np.divide(ray[lbl]-mn[lbl], rng[lbl],
                                              where=rng[lbl]!=0,
                                              out=ray[lbl]-mn[lbl]));
         ax[i].set_ylabel(lbl)
         ax[i].xaxis.grid()
-    ax[2].set_xlabel('turn')
-    # plt.xticks(ticks=ray['EID'], labels=NICA_EL_LBLS[ray['EID']], rotation=45)
+        ax[i].ticklabel_format(axis='y', style = 'sci', scilimits=(0,0), useMathText=True)
+    ax[2].set_xlabel(xlab[case])
+    if xlab[case]=='EID':
+        if ray.ndim==2:
+            plt.xticks(ticks=ray['EID'][:,0], labels=NICA_EL_LBLS[ray['EID'][:,0]], rotation=45)
+        else:
+            plt.xticks(ticks=ray['EID'], labels=NICA_EL_LBLS[ray['EID']], rotation=45)
 
     fig, ax = plt.subplots(3,1)
     ax[0].plot(ray['S_Z'], ray['S_X'])
@@ -51,10 +56,10 @@ def plot_ps(ray):
     ax[1].set_xlabel('turn')
 
 case = 'tr'
-
+xlab = {'tr':'turn', 'trel':'EID'}
 plot = {'ps': lambda ray: plot_ps(ray), 'sp': lambda ray: plot_sp(ray)}
 
-HOME = '/Users/alexaksentyev/REPOS/NICA-FS/'
+HOME = '/Users/alexaksentyev/REPOS/NICA-FS/' + ('data/TEST/TREL/' if case=='trel' else 'data/TEST/')
 NICA_EL_LBLS = np.insert(np.load('nica_element_names.npy'),0,'INJ')
 NICA_EL_LBLS = np.array([e+' ['+ str(i) + ']' for i,e in enumerate(NICA_EL_LBLS)])
 VARS = {
@@ -67,8 +72,8 @@ d_type = {
     }
     
 dat = {
-    'sp' : np.loadtxt(HOME+'data/TEST/TRPSPI:{}.dat'.format(case.upper()), d_type[case]('sp'), skiprows=2),
-    'ps': np.loadtxt(HOME+'data/TEST/TRPRAY:{}.dat'.format(case.upper()), d_type[case]('ps'), skiprows=2)
+    'sp' : np.loadtxt(HOME+'TRPSPI:{}.dat'.format(case.upper()), d_type[case]('sp'), skiprows=2),
+    'ps': np.loadtxt(HOME+'TRPRAY:{}.dat'.format(case.upper()), d_type[case]('ps'), skiprows=2)
     }
 nray = dat['sp']['PID'].max() + 1
 for el in ['ps','sp']:
@@ -86,16 +91,17 @@ S_X = ray['sp']['S_X']
 S_Y = ray['sp']['S_Y']
 S_Z = ray['sp']['S_Z']
 
+if False:
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
+    ax.set_xlim(-1, 1)
+    ax.set_ylim(-1, 1)
+    ax.set_zlim(-1, 1)
 
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
-ax.set_xlabel('X')
-ax.set_ylabel('Y')
-ax.set_zlabel('Z')
-ax.set_xlim(-1, 1)
-ax.set_ylim(-1, 1)
-ax.set_zlim(-1, 1)
+    quiver = ax.quiver(*get_arrow(0, S_X, S_Y, S_Z))
 
-quiver = ax.quiver(*get_arrow(0, S_X, S_Y, S_Z))
-
-anim = animation.FuncAnimation(fig, update, fargs=(S_X, S_Y, S_Z), interval=10, blit=False)
+    anim = animation.FuncAnimation(fig, update, fargs=(S_X, S_Y, S_Z), interval=10, blit=False)
+    anim.save('../reports/spin-animation.gif', writer='imagemagick', fps=60)
