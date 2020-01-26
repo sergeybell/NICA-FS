@@ -64,8 +64,7 @@ PROCEDURE RUN;
       CNT := CNT + 1;
       WRITE 6 ST(CNT)&'    '&ST(OBJ)&'     '&ST(HZ1);
     ENDFIT 1E-12 100 1 OBJ;
-  ENDPROCEDURE;
-  
+  ENDPROCEDURE;  {OPTIMIZE}
 
   DIRSET WHERE 'data/TEST/' TRUE;
   GROUTF 'img/dump/TR' 1;
