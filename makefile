@@ -13,7 +13,7 @@ core.bld: $(addprefix $(CORE-DIR)/bin/, cosy.bin utilities.bin) bin/elements.bin
 setups.bld: $(addprefix bin/setups/, $(SETUPS)) core.bld
 	echo $(SETUPS) >> setups.bld
 
-support.bld: $(addprefix bin/support/, $(SUPPORT)) setups.bld
+support.bld: $(addprefix bin/, $(SUPPORT)) setups.bld
 	echo $(SUPPORT) >> support.bld
 
 $(CORE-DIR)/bin/cosy.bin: $(CORE-DIR)/src/cosy.fox ;
@@ -25,7 +25,7 @@ bin/elements.bin: src/elements.fox $(CORE-DIR)/bin/utilities.bin
 
 bin/setups/%.bin: src/setups/%.fox bin/elements.bin 
 	cosy $<;
-bin/support/%.bin: src/support/%.fox setups.bld
+bin/%.bin: src/support/%.fox setups.bld
 	cosy $<;
 
 TE/% : test/%.fox support.bld
