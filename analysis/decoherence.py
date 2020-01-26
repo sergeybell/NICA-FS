@@ -1,7 +1,22 @@
 import numpy as np
 import matplotlib.pyplot as plt; plt.ion()
+from scipy import stats
+
+## for 3d animation
 from mpl_toolkits.mplot3d import Axes3D, proj3d
 from matplotlib import animation
+
+def get_arrow(index, S_X, S_Y, S_Z):
+    return 0, 0, 0, S_X[index], S_Y[index], S_Z[index]
+
+def update(index, S_X, S_Y, S_Z):
+    global quiver
+    quiver.remove()
+    quiver = ax.quiver(*get_arrow(0, S_X, S_Y, S_Z), color='r')
+    quiver = ax.quiver(*get_arrow(-1, S_X, S_Y, S_Z), color='k')
+    quiver = ax.quiver(*get_arrow(index, S_X, S_Y, S_Z))
+##
+
 
 def svec(r):
     a = [r['S_X'], r['S_Y'], r['S_Z']]
@@ -37,6 +52,13 @@ def plot_decoh_meas(data):
     for i, lbl in enumerate(['X','Y']):
         ax[i].plot(data['turn'], dm[lbl])
         ax[i].set_ylabel('RMS(S_{})'.format(lbl))
+
+def polarization(data):
+    S = {lbl:data['S_'+lbl] for lbl in ['X','Y','Z']}
+    nray = S['X'].shape[1]
+    P = {lbl: np.sum(S[lbl],axis=1)/nray for lbl in ['X','Y','Z']}
+    return P
+    
     
 
 plot = {'ps': lambda ray: plot_ps(ray), 'sp': lambda ray: plot_sp(ray)}
@@ -51,15 +73,31 @@ VARS = {
 d_type = lambda case: list(zip(['turn', 'PID'], [int]*2)) + VARS[case]
     
 dat = {
-    'sp' : np.loadtxt(HOME+'data/DECOH/TRPSPI:TR.dat', d_type('sp'), skiprows=2),
-    'ps': np.loadtxt(HOME+'data/DECOH/TRPRAY:TR.dat', d_type('ps'), skiprows=2)
+    'sp' : np.loadtxt(HOME+'data/DECOH/TRPSPI:TR.dat', d_type('sp'), skiprows=2)#,
+    # 'ps': np.loadtxt(HOME+'data/DECOH/TRPRAY:TR.dat', d_type('ps'), skiprows=2)
     }
 nray = dat['sp']['PID'].max() + 1
-for el in ['ps','sp']:
+for el in ['sp']:#,'sp']:
     dat[el].shape = (-1, nray)
     dat[el] = dat[el][:,1:]
 
 
 pid = 0
 plot['sp'](dat['sp'][:,pid])
+plot_decoh_meas(dat['sp'])
 
+S_X, S_Y, S_Z = (dat['sp']['S_'+lbl][np.arange(0, 1001, 100), :] for lbl in ['X','Y','Z'])
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.set_xlabel('X')
+ax.set_ylabel('Z')
+ax.set_zlabel('Y')
+ax.set_xlim(-1, 1)
+ax.set_ylim(-1, 1)
+ax.set_zlim(-1, 1)
+
+quiver = ax.quiver(*get_arrow(0, S_X, S_Z, S_Y))
+
+anim = animation.FuncAnimation(fig, update, fargs=(S_X, S_Z, S_Y), interval=10, blit=False, frames=S_X.shape[0])
+anim.save('decoherence_10e6.gif')
