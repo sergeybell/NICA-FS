@@ -15,9 +15,9 @@ def get_arrow(index, S_X, S_Y, S_Z):
 def update(index, S_X, S_Y, S_Z):
     global quiver
     quiver.remove()
-    quiver = ax.quiver(*get_arrow(0, S_X, S_Y, S_Z), color='r')
-    quiver = ax.quiver(*get_arrow(-1, S_X, S_Y, S_Z), color='k')
-    quiver = ax.quiver(*get_arrow(index, S_X, S_Y, S_Z))
+    quiver = ax0.quiver(*get_arrow(0, S_X, S_Y, S_Z), color='r')
+    quiver = ax0.quiver(*get_arrow(-1, S_X, S_Y, S_Z), color='k')
+    quiver = ax0.quiver(*get_arrow(index, S_X, S_Y, S_Z))
 ##
 
 def plot_decoh_meas(data):
@@ -48,25 +48,26 @@ def load_data(path):
 ##
 
 HOME = '/Users/alexaksentyev/REPOS/NICA-FS/'
-DIR = 'data/DECOH/SHORT/INJECT_SPIN/OPTIMAL/'
+DIR = 'data/DECOH/SHORT/INJECT/OPTIMAL/'
 dat, nray = load_data(HOME + DIR)
 
-bunch_num = 4
+bunch_num = 3
 a = ana.Analysis(dat['sp'][:, np.arange(bunch_num-1, nray, 4)])
-# S_X, S_Y, S_Z = (a.S[lbl][np.arange(0, 1001, 50)] for lbl in ['X','Y','Z'])
+S_X, S_Y, S_Z = (a.S[lbl][np.arange(0, 1001, 50)] for lbl in ['X','Y','Z'])
+S = np.sqrt(S_X**2 + S_Y**2 + S_Z**2)
 
-# fig0 = plt.figure()
-# ax = fig0.add_subplot(111, projection='3d')
-# ax.set_xlabel('X')
-# ax.set_ylabel('Z')
-# ax.set_zlabel('Y')
-# ax.set_xlim(-1, 1)
-# ax.set_ylim(-1, 1)
-# ax.set_zlim(-1, 1)
+fig0 = plt.figure()
+ax0 = fig0.add_subplot(111, projection='3d')
+ax0.set_xlabel('X')
+ax0.set_ylabel('Z')
+ax0.set_zlabel('Y')
+ax0.set_xlim(-1, 1)
+ax0.set_ylim(-1, 1)
+ax0.set_zlim(-1, 1)
 
-# quiver = ax.quiver(*get_arrow(0, S_X, S_Z, S_Y))
+quiver = ax0.quiver(*get_arrow(0, S_X, S_Z, S_Y))
 
-# anim = animation.FuncAnimation(fig0, update, fargs=(S_X, S_Z, S_Y), interval=10, blit=False, frames=S_X.shape[0])
+anim = animation.FuncAnimation(fig0, update, fargs=(S_X, S_Z, S_Y), interval=10, blit=False, frames=S_X.shape[0])
 # anim.save('../reports/decoherence_10e6.gif')
 
 fig, ax = plt.subplots(1,1)
@@ -83,24 +84,24 @@ ax.plot(nn*ftr, popt[0] + popt[1]*nn*ftr, 'r-', label=r'$(\beta_0 = {:4.2e}, \be
 ax.legend()
 ax.set_title(DIR)
 
-# def init():  # only required for blitting to give a clean slate.
-#     line.set_ydata([np.nan] * X.shape[1])
-#     return line,
+def init():  # only required for blitting to give a clean slate.
+    line.set_ydata([np.nan] * X.shape[1])
+    return line,
 
 
-# def animate(i):
-#     line.set_data(X[i], A[i]) # update the data.
-#     return line,
+def animate(i):
+    line.set_data(X[i], A[i]) # update the data.
+    return line,
 
-#elems = np.concatenate((np.arange(0,50,10), np.arange(100,400, 10), np.array([420, 450, 470, 471])))
-# X, A = (dat['ps'][lbl] for lbl in ['T','D'])
+elems = np.concatenate((np.arange(0,50,10), np.arange(100,400, 10), np.array([420, 450, 470, 471])))
+X, A = (dat['ps'][lbl] for lbl in ['T','D'])
 
-# fig1, ax = plt.subplots()
-# ax.set_xlim(-2e-3,2e-3)
-# ax.set_ylim(-2e-3, 2e-3)
+fig1, ax1 = plt.subplots()
+ax1.set_xlim(-2e-3, 2e-3)
+ax1.set_ylim(-2e-3, 2e-3)
 
-# line, = ax.plot(X[0], A[0], 'r.')
+line, = ax1.plot(X[0], A[0], 'r.')
 
 
-# ani = animation.FuncAnimation(fig1, animate, #init_func=init,
-#                                   interval=200, blit=False, save_count=50, frames=X.shape[0])
+ani = animation.FuncAnimation(fig1, animate, init_func=init,
+                                  interval=200, blit=True, save_count=50, frames=X.shape[0])
