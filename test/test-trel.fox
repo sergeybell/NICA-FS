@@ -4,7 +4,7 @@
 
 
 
-INCLUDE 'bin/support';
+INCLUDE 'bin/support/support';
 
 PROCEDURE RUN;
   VARIABLE WHERE 100;

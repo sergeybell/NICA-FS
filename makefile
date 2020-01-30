@@ -25,7 +25,7 @@ bin/elements.bin: src/elements.fox $(CORE-DIR)/bin/utilities.bin
 
 bin/setups/%.bin: src/setups/%.fox bin/elements.bin 
 	cosy $<;
-bin/%.bin: src/support/%.fox setups.bld
+bin/support/%.bin: src/support/%.fox setups.bld
 	cosy $<;
 
 TE/% : test/%.fox support.bld
