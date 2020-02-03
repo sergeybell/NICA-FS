@@ -2,13 +2,15 @@ import numpy as np
 import matplotlib.pyplot as plt; plt.ion()
 from scipy.optimize import curve_fit
 
-dat = np.loadtxt('ERROR.txt', skiprows=1, dtype = [('EL', int), ('SYM', float), ('SNR', float)])
+dat = np.loadtxt('ERROR:TR-COSY.txt', skiprows=1, dtype = [('NUM', int), ('SYM', float), ('SNR', float)])
+
+turn=500
 
 fig, ax = plt.subplots(2,1, sharex=True)
 for i, var in enumerate(['SYM', 'SNR']):
-    ax[i].plot(dat['EL'], dat[var], '-.')
+    ax[i].plot(dat['NUM'][:turn], dat[var][:turn], '-.')
     ax[i].set_ylabel(var)
-    ax[i].set_yscale('log')
+    # ax[i].set_yscale('log')
 
 fig1, ax1 = plt.subplots(1,1)
 ax1.plot(dat['SYM'], dat['SNR'], '.')
