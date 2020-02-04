@@ -5,6 +5,8 @@ deu_mass = 1.8765592; // GeV
 beam, PARTICLE=ION, ENERGY=0.270+deu_mass, MASS=deu_mass;
 use, sequence=NICA;
 
+SELECT, FLAG=TWISS, COLUMN= _name, q1, q2, betx, bety, orbit5;
+
 twiss, save, centre, file=tbl/twiss.out; 
 
 plot, haxis=s, vaxis=betx,bety,dx,colour=100, style=100,file=img/twiss_plot;
@@ -15,7 +17,8 @@ START, x=1e-3;
 START, x=.8e-3;
 START, y=1e-3;
 START, y=.8e-3;
-RUN, turns=100, ffile=1;
+DYNAP, TURNS=1000, FASTUNE=TRUE;
+RUN, turns=5000, ffile=1;
 ENDTRACK;
 
 PLOT, file=img/track_plot, table=trackone, trackfile=tbl/basis, multiple,
@@ -29,6 +32,13 @@ PLOT, file=img/track_plot, table=trackone, trackfile=tbl/basis, multiple,
 
 PLOT, file=img/track_plot, table=trackone, trackfile=tbl/basis, multiple,
       haxis=y, vaxis=py, particle=1,2,3,4;
+
+
+
+VALUE, TABLE(dynaptune, tunx);
+VALUE, TABLE(dynaptune, tuny);
+VALUE, TABLE(summ, q1);
+VALUE, TABLE(summ, q2);
 
 stop;
 

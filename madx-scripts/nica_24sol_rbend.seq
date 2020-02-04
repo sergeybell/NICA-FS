@@ -1,3 +1,17 @@
+koef = 5; ! attenuation coefficient
+! я ввёл его, чтобы посмотреть что будет, когда HZ1, QF, QD =/= 0,
+! но достаточно малы (пробовал значения koef = 1000 & koef = 5)
+! при koef < 5, table(summ, q1) = table(summ, q2) = 0
+!     	     	table(dynaptune, tunx) = table(dynaptune, tuny) = nan
+! Также, при значении koef = 1000, бета-функции betx, bety на графике twiss_plot примерно одинаковые
+! Если же принять koef = 5, bety вырастает в 10 раз на границах структуры
+HZ1  = 0.4363984273603275/koef; ! HZ1 вычислено по формуле (1) в файле "Пояснения к структуре"
+QF   = -.044/koef;
+QD   = -.032/koef;
+
+// Далее файл структуры без изменений, как я его получил
+// (только поменял навзвание struct: LINE=... -> NICA: LINE=...)
+
 Drift_1:	DRIFT, L=5.25;
 Quadr_2:	QUADRUPOLE, L=0.65, K1=-0.5231928251;
 Drift_3:	DRIFT, L=0.3;
