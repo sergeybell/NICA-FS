@@ -1,8 +1,9 @@
 import re
+import numpy as np
 
 HOME = '/Users/alexaksentyev/REPOS/NICA-FS/'
-INFILE = 'madx-scripts/NICA_full.seq'
-OUTFILE = 'src/setups/NICA_full.fox'
+INFILE = 'madx-scripts/nica_24sol_rbend.seq'
+OUTFILE = 'src/setups/nica_24sol_rbend.fox'
 
 
 el_dict = {
@@ -19,8 +20,9 @@ el_dict = {
     'RFCAVITY': ('RFCAV', 4)
     }
 
-var_dclr = []
-var_def = []
+var_dclr = [] # variable declarations
+var_def = []  # variable definitions
+length_arr = [] # element length array
 
 argpos_dict = {
     'SEXT': {'TILT': 1, 'KNL':2},
@@ -55,6 +57,7 @@ def insert_args(element):
     n_zeros = n_arg-len(element[1:])
     elem = [element[0]]
     elem.extend(['name=0' for i in range(n_zeros)])
+    length_arr.append(float(element[1].strip().split('=')[1])) # pick element length from parameters
     for par in element[1:]:
         par_name, par_val = par.strip().split('=')
         elem.insert(argpos_dict[elem_name][par_name],par_name+'='+par_val)
@@ -117,16 +120,16 @@ def write_file(line, fout):
 fout = open(HOME+OUTFILE,'w')
 with open(HOME+INFILE, 'r') as fin:
     for cnt, line in enumerate(fin):
-        if cnt<6: # 0
+        if cnt<0: # 6
             pass
-        elif cnt<138: # 471
+        elif cnt<471: # 138
             print(cnt)
             write_dict(line)
-        elif cnt<143: # 472
+        elif cnt<472: # 143
             print('++', cnt)
             print(line)
             pass
-        elif cnt>142: # 472
+        elif cnt>472: # 142
             print('##',cnt)
             print(line)
             if (line[0]!='\n' and line[0]!='/'):
@@ -140,5 +143,9 @@ with open(HOME+OUTFILE,'r+') as fout:
     content = fout.read()
     write_header(fout)
     fout.write(content)
+
+## computing the lattice length
+length_arr = np.array(length_arr)
+print('lattice length: ', length_arr.sum())
     
 
