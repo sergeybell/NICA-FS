@@ -21,10 +21,10 @@ inject_deuterons(gamma_): MACRO = {
 ! ##################################################
 
 ! ********** TEST PROPER **********
-EXEC, inject_deuterons(1.14);
+EXEC, inject_protons(1.14);
 
 ! testing different solenoid strength values
-koef = 1000; ! attenuation coefficient
+koef = 1; ! attenuation coefficient
 HZ1 = HZ1/koef;
 QF = QF/koef;
 QD = QD/koef;
