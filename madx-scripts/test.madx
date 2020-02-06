@@ -1,8 +1,10 @@
 call file = "nica_24sol_rbend.seq";
 
 deu_mass = 1.8765592; // GeV
+prot_mass = 0.938; // GeV
 
-beam, PARTICLE=ION, ENERGY=0.270+deu_mass, MASS=deu_mass;
+beam, PARTICLE=ION, MASS=deu_mass, GAMMA=1.14;
+//beam, PARTICLE=PROTON, GAMMA=1.14;
 use, sequence=NICA;
 
 SELECT, FLAG=TWISS, COLUMN= _name, q1, q2, betx, bety, orbit5;
@@ -18,7 +20,7 @@ START, x=.8e-3;
 START, y=1e-3;
 START, y=.8e-3;
 DYNAP, TURNS=1000, FASTUNE=TRUE;
-RUN, turns=5000, ffile=1;
+RUN, turns=1000, ffile=1;
 ENDTRACK;
 
 PLOT, file=img/track_plot, table=trackone, trackfile=tbl/basis, multiple,

@@ -1,13 +1,31 @@
-koef = 5; ! attenuation coefficient
+
+snake_str(G, ss): MACRO = {ss = 1/12 * PI/(1 + G)*1/.7;}; //формулa (1) в файле "Пояснения к структуре"
+
+! proton ane deuteron anomalous magnetic moments
+proton_G = 1.792847;
+deuteron_G = -.142987;
+
+
+! ***** Lattice parameters for the proton case *****
+! EXEC, snake_str(proton_G, HZ1);
+! QF   = -0.011;
+! QD   = -0.012;
+
+! ***** Lattice parameters for the deuteron case *****
+koef = 1000; ! attenuation coefficient
 ! я ввёл его, чтобы посмотреть что будет, когда HZ1, QF, QD =/= 0,
 ! но достаточно малы (пробовал значения koef = 1000 & koef = 5)
 ! при koef < 5, table(summ, q1) = table(summ, q2) = 0
 !     	     	table(dynaptune, tunx) = table(dynaptune, tuny) = nan
 ! Также, при значении koef = 1000, бета-функции betx, bety на графике twiss_plot примерно одинаковые
 ! Если же принять koef = 5, bety вырастает в 10 раз на границах структуры
-HZ1  = 0.4363984273603275/koef; ! HZ1 вычислено по формуле (1) в файле "Пояснения к структуре"
+EXEC, snake_str(deuteron_G, HZ1); HZ1 = HZ1/koef;
 QF   = -.044/koef;
 QD   = -.032/koef;
+! ****************************************
+
+! ** this is true for both cases **
+HZ2  = HZ1;
 
 // Далее файл структуры без изменений, как я его получил
 // (только поменял навзвание struct: LINE=... -> NICA: LINE=...)
