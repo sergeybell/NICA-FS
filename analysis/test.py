@@ -46,4 +46,4 @@ if __name__ == '__main__':
         plot_ps(psb, varx,vary, turns)
         return psb, spb
 
-    psb, spb = plot_main(3,turns=10)
+    psb, spb = plot_main(0,'iteration','X',turns=10)
