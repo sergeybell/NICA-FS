@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt; plt.ion()
+import analysis as ana
 
 HOME = '/Users/alexaksentyev/REPOS/NICA-FS/'
 DIR  = 'data/TEST/'
@@ -46,4 +47,7 @@ if __name__ == '__main__':
         plot_ps(psb, varx,vary, turns)
         return psb, spb
 
-    psb, spb = plot_main(0,'iteration','X',turns=10)
+    psb, spb = plot_main(0,'iteration','X',turns=1500)
+
+    
+    X = ana.DAVEC(HOME+DIR+'MAP_1.da')
