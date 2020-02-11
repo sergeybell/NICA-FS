@@ -48,8 +48,12 @@ PROCEDURE RUN;
 
   WRITE 6 '';
   WRITE 6 'PARTICLE BETA: '&ST(CONS(V0)/CLIGHT);
-  
-  BENDS24_SETUP 0 0 0 0 0 0 0 ;{ HZ1 HZ2 KZ1 KZ2 QF QD 0; }
+
+  BENDS24_SETUP HZ1 HZ2 KZ1 KZ2 QF QD 0;
+  WRITE 6 'MAP SYMPLECTICITY ERROR = '&ST(SE(MAP));
+  SY MAP; {command to symplectify the MAP using the modt accurate generation function}
+  WRITE 6 'MAP SYMPLECTICITY ERROR (after SY) = '&ST(SE(MAP));
+quit 0;
 
   OPENF 1045 WHERE&'MAP' 'REPLACE';
     PM 1045;
