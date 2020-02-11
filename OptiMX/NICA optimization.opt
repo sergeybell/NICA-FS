@@ -1,0 +1,715 @@
+# Flags switch on(1)/off(0)
+$ON_RF=0;  =>           0
+$ON_COUPLING=1;  =>           1
+$ON_CHROMATICITY=0;  =>           0
+$ON_DA=1;  =>           1
+
+# MAD-X definitions
+
+#-----BEGIN QUADRUPOLE------
+
+$K1QFF1=0.4310053185;  => 0.431005319
+$K1QFF2=0.4317078362;  => 0.431707836
+$K1QFF3=0.4318898134;  => 0.431889813
+
+$K1QSS1=0.5165568535;  => 0.516556854
+$K1QSS2=0.5122359046;  => 0.512235905
+$K1QSS3=0.5151725297;  =>  0.51517253
+$K1QSS4=0.5103863379;  => 0.510386338
+$K1QSS5=0.5188423602;  =>  0.51884236
+$K1QSS6=0.5181060639;  => 0.518106064
+
+$K1DSU1=0.5170793044;  => 0.517079304
+$K1ARC1=0.5148373645;  => 0.514837364
+$K1DSU2=0.5167500275;  => 0.516750027
+$K1ARC2=0.5037116682;  => 0.503711668
+
+$K1QSS6_SSA2=0.5179341931;  => 0.517934193
+$K1QSS5_SSA2=0.5189027318;  => 0.518902732
+$K1QSS4_SSA2=0.5101691458;  => 0.510169146
+$K1QSS3_SSA2=0.5148859017;  => 0.514885902
+$K1QSS2_SSA2=0.5128606793;  => 0.512860679
+$K1QSS1_SSA2=0.5169984863;  => 0.516998486
+
+$K1QFF3_SSA2=0.4319226383;  => 0.431922638
+$K1QFF2_SSA2=0.4317407418;  => 0.431740742
+$K1QFF1_SSA2=0.4310354941;  => 0.431035494
+
+$K1QFF1_SSA1=0.4310060238;  => 0.431006024
+$K1QFF2_SSA1=0.4316837947;  => 0.431683795
+$K1QFF3_SSA1=0.4318070434;  => 0.431807043
+
+$K1QSS1_SSA1=0.5163885875;  => 0.516388588
+$K1QSS2_SSA1=0.5120732105;  =>  0.51207321
+$K1QSS3_SSA1=0.5152730568;  => 0.515273057
+$K1QSS4_SSA1=0.5103752857;  => 0.510375286
+$K1QSS5_SSA1=0.5183030027;  => 0.518303003
+$K1QSS6_SSA1=0.5176793504;  =>  0.51767935
+
+$LQFF1=0.95;  =>        0.95
+$LQFF2=1.42;  =>        1.42
+$LQFF3=0.68;  =>        0.68
+
+$LQSS1=0.54;  =>        0.54
+$LQSS2=0.575;  =>       0.575
+$LQSS3=0.575;  =>       0.575
+$LQSS4=0.677;  =>       0.677
+$LQSS5=0.677;  =>       0.677
+$LQSS6=0.78;  =>        0.78
+
+$LDSU1=0.375;  =>       0.375
+$LARC1=0.47;  =>        0.47
+$LDSU2=0.45;  =>        0.45
+$LARC2=0.47;  =>        0.47
+#-----END QUADRUPOLE------
+
+#-----BEGIN CORRECTOS------
+
+$MCQ = 0.;  =>           0
+$MCS0 = 0.;  =>           0
+$MCS1 = 0.3087707802;  =>  0.30877078
+$MCS2 = -1.041359465;  => -1.04135946
+$MCS3 = 0.1989344053;  => 0.198934405
+$MCS4 = -1.159018825;  => -1.15901882
+$MCO0 = 0.;  =>           0
+$MCO1=-7.;  =>          -7
+$MCO2=1.;  =>           1
+$MCO3=-8.;  =>          -8
+
+#-----END CORRECTORS------
+
+#------BEGIN CORRECTORS-------
+
+$MC2WQ_A1=-0.0007109275654;  =>-0.000710927565
+$MC1W2Q_A1=0.001499664851;  =>0.00149966485
+$MC2W2Q_A1=-0.002236031846;  =>-0.00223603185
+$MC3W2Q_A1=0.002306882286;  =>0.00230688229
+$MC4W2Q_A1=-0.01044550134;  =>-0.0104455013
+
+$MC2EQ_A1=-0.0002331118156;  =>-0.000233111816
+$MC1E2Q_A1=0.001287635986;  =>0.00128763599
+$MC2E2Q_A1=0.00523915307;  =>0.00523915307
+$MC3E2Q_A1=-0.00530605772;  =>-0.00530605772
+$MC4E2Q_A1=-0.008035500972;  =>-0.00803550097
+
+$MC30W2Q_A1=0.003867645532;  =>0.00386764553
+$MC31W2Q_A1=-0.007596286217;  =>-0.00759628622
+$MC32W2Q_A1=0.005550743022;  =>0.00555074302
+$MC33W2Q_A1=0.0004984698073;  =>0.000498469807
+$MC1WQ_A1=0.001079899302;  =>0.0010798993
+
+$MC30E2Q_A1=0.003494319786;  =>0.00349431979
+$MC31E2Q_A1=-1.483222433E-005;  =>-1.48322243e-005
+$MC32E2Q_A1=0.0002308595768;  =>0.000230859577
+$MC33E2Q_A1=0.002715259637;  =>0.00271525964
+$MC1EQ_A1=-0.0008960179206;  =>-0.000896017921
+
+#------END CORRECTORS-------
+# End of MAD-X definitions
+
+#-------------------------------------beam parameters
+# Vacuum permeability
+$MU0=$pi*4.e-7;  =>1.25663706e-006
+
+# Charge and mass
+$Z=79.;  =>          79
+$A=197.;  =>         197
+
+# Kinetic energy, MeV/u
+$W=4500.;  =>        4500
+
+# Unified atomic mass unit, MeM/u
+$Mn=931.494061;  =>  931.494061
+
+# Lorentz factors
+$GAMMA=($Mn+$W)/$Mn;  =>  5.83094868
+$BETA=sqrt(1.-1./$GAMMA^2);  =>  0.98518435
+
+# Beam particle momentum, MeV/u
+$P0=$Mn*$BETA*$GAMMA;  =>  5351.02294
+
+# Magnetic rigidity, kGs*cm
+$BRHO=$A/$Z*$P0/$c*1.e+11;  =>  44509.7592
+
+# Beam emittances [cm] ( /$pi*0.1*0.001 - converts X in Pi*mm*mrad -> cm ( * rad ) )
+$EmitX=39.6*10^(-4);  =>     0.00396
+$EmitY=31.0*10^(-4);  =>      0.0031
+
+$SigmaS=60.;  =>          60
+$dp_p=       6*0.00156;  =>     0.00936
+
+#-------------------------------------------end beam parameters
+
+# Length of the corrector, cm
+$CORR_L=30.;  =>          30
+
+# Some shifts in arcs, cm
+$DELTA1=45.;  =>          45
+$DELTA2=50.;  =>          50
+
+# Convert coefficients from MAD-X to OptiMX
+$K1=$BRHO*1.e-2;  =>  445.097592
+$K2=$BRHO*1.e-4;  =>  4.45097592
+$K3=$BRHO*1.e-6;  =>0.0445097592
+$TO_CM=1.e+2;  =>         100
+
+#---------BEGIN DIPOLES--------
+# Main dipole effective length, cm
+$BM_L=194.;  =>         194
+
+# Number of dipoles in the ring, pcs
+$BM_N=80;  =>          80
+
+# Number of turns in main dipole coil
+$BM_NT=10;  =>          10
+
+# Half gap of the main dipole, cm
+$BM_HGAP=3.6;  =>         3.6
+
+# Magnetic field in the main dipoles, kGs
+$BM_B=2.*$pi*$BRHO/$BM_N/$BM_L;  =>  18.0195274
+
+# Main dipole current, A
+$BM_I=($BM_B/10.)*(2.*$BM_HGAP/100.)/($MU0*$BM_NT);  =>  10324.4287
+
+# Check dipole current value
+$BM_C=($BM_I *$BM_NT) * $MU0 / (2.0*$BM_HGAP/100.) *10.;  =>  18.0195274
+
+# Half bending angle in main dipole, deg
+$PHI=0.5*$BM_B*$BM_L/$BRHO*180./$pi;  =>        2.25
+
+# Main dipole sextupole non-linearity, rel.u
+$B2=6.59e-4*$ON_CHROMATICITY;  =>           0
+
+# Reference radius of b2 determination, cm
+$R_REF=3.;  =>           3
+
+# Main dipole sextupole non-linearity, kGs/cm
+$B2L=0.025*$pi*$BRHO*$B2/$R_REF^2;  =>           0
+
+#---------END DIPOLES--------
+
+#-----beam vertical bending magnets
+# Effective length of BV1 magnet, cm
+$BV1_L=138.;  =>         138
+
+# Effective length of BV2 magnet, cm
+$BV2_L=138.;  =>         138
+
+# Orbit elevation above median plane after BV2, cm
+$BV2_H=16.;  =>          16
+
+# Vertical bending angle, rad
+$ALPHA=0.04100340928;  =>0.0410034093
+
+# Long distance between CENTERS of BV1 and BV2, cm
+$BV12_CL=$BV2_H/tan($ALPHA);  =>  389.992746
+
+# Long distance between edges of BV1 and BV2, cm
+$OBV12_L=($BV2_H-(($BV1_L+$BV2_L)*(1.-cos($ALPHA)))/$ALPHA)/sin($ALPHA);  =>  252.301481
+
+# Magnetic field in BV1, BV2, kGs
+$BV1_B=$BRHO*$ALPHA/$BV1_L;  =>  13.2250136
+$BV2_B=$BRHO*$ALPHA/$BV2_L;  =>  13.2250136
+
+$DELTA0=($BV1_L-136.8801324)+($BV2_L-136.8801324)+($OBV12_L-($BV2_H-((136.8801324+136.8801324)*(1.-cos($ALPHA)))/$ALPHA)/sin($ALPHA));  =>  1.11971067
+
+#-------end beam vertical bending magnets
+
+#----------RF-3 initialization
+# Collider circumference, cm
+$C_RING=503.04*$TO_CM;  =>       50304
+
+# Solenoid length of the electron cooling system, cm
+$EC_L=600.;  =>         600
+# Solenoid length of the MPD, cm
+$MPD_L=525.;  =>         525
+# Solenoid length of the SPD, cm
+$SPD_L=525.;  =>         525
+
+# RF-3 voltage harmonic number
+$RF3W2_HARMON=66;  =>          66
+# RF-3
+$RF3W2_LAMBDA=$C_RING/$BETA/$RF3W2_HARMON;  =>  773.643855
+# RF-3 cavities lengths, cm
+$RF3W21_L=208.5/1.;  =>       208.5
+$RF3W22_L=386.5/2.;  =>      193.25
+$RF3W25_L=920.5/5.;  =>       184.1
+#-_------end RF-3 initialization
+
+# Quadrupole gradients, kGs/cm
+$K1QFF1=$K1QFF1*$K2;  =>   1.9183943
+$K1QFF2=$K1QFF2*$K2;  =>  1.92152118
+$K1QFF3=$K1QFF3*$K2;  =>  1.92233116
+
+$K1QSS1=$K1QSS1*$K2;  =>  2.29918212
+$K1QSS2=$K1QSS2*$K2;  =>  2.27994968
+$K1QSS3=$K1QSS3*$K2;  =>  2.29302053
+$K1QSS4=$K1QSS4*$K2;  =>   2.2717173
+$K1QSS5=$K1QSS5*$K2;  =>  2.30935485
+$K1QSS6=$K1QSS6*$K2;  =>  2.30607762
+
+$K1DSU1=$K1DSU1*$K2;  =>  2.30150753
+$K1ARC1=$K1ARC1*$K2;  =>  2.29152871
+$K1DSU2=$K1DSU2*$K2;  =>  2.30004193
+$K1ARC2=$K1ARC2*$K2;  =>  2.24200851
+
+$K1QFF1_SSA2=$K1QFF1_SSA2*$K2;  =>  1.91852861
+$K1QFF2_SSA2=$K1QFF2_SSA2*$K2;  =>  1.92166765
+$K1QFF3_SSA2=$K1QFF3_SSA2*$K2;  =>  1.92247726
+$K1QSS1_SSA2=$K1QSS1_SSA2*$K2;  =>  2.30114782
+$K1QSS2_SSA2=$K1QSS2_SSA2*$K2;  =>  2.28273054
+$K1QSS3_SSA2=$K1QSS3_SSA2*$K2;  =>  2.29174475
+$K1QSS4_SSA2=$K1QSS4_SSA2*$K2;  =>  2.27075058
+$K1QSS5_SSA2=$K1QSS5_SSA2*$K2;  =>  2.30962357
+$K1QSS6_SSA2=$K1QSS6_SSA2*$K2;  =>  2.30531262
+$K1QFF1_SSA1=$K1QFF1_SSA1*$K2;  =>  1.91839743
+$K1QFF2_SSA1=$K1QFF2_SSA1*$K2;  =>  1.92141418
+$K1QFF3_SSA1=$K1QFF3_SSA1*$K2;  =>  1.92196275
+$K1QSS1_SSA1=$K1QSS1_SSA1*$K2;  =>  2.29843317
+$K1QSS2_SSA1=$K1QSS2_SSA1*$K2;  =>  2.27922553
+$K1QSS3_SSA1=$K1QSS3_SSA1*$K2;  =>  2.29346797
+$K1QSS4_SSA1=$K1QSS4_SSA1*$K2;  =>  2.27166811
+$K1QSS5_SSA1=$K1QSS5_SSA1*$K2;  =>  2.30695419
+$K1QSS6_SSA1=$K1QSS6_SSA1*$K2;  =>  2.30417832
+
+# Quadrupole lengths, cm
+$LQFF1=$LQFF1*$TO_CM;  =>          95
+$LQFF2=$LQFF2*$TO_CM;  =>         142
+$LQFF3=$LQFF3*$TO_CM;  =>          68
+$LQSS1=$LQSS1*$TO_CM;  =>          54
+$LQSS2=$LQSS2*$TO_CM;  =>        57.5
+$LQSS3=$LQSS3*$TO_CM;  =>        57.5
+$LQSS4=$LQSS4*$TO_CM;  =>        67.7
+$LQSS5=$LQSS5*$TO_CM;  =>        67.7
+$LQSS6=$LQSS6*$TO_CM;  =>          78
+$LDSU1=$LDSU1*$TO_CM;  =>        37.5
+$LARC1=$LARC1*$TO_CM;  =>          47
+$LDSU2=$LDSU2*$TO_CM;  =>          45
+$LARC2=$LARC2*$TO_CM;  =>          47
+
+# Multipole corrector gradients: A1 in kGs, B2 in kGs/cm, B3 in kGs/cm^2
+
+$MCQ = $MCQ * $K1 * $ON_COUPLING;  =>           0
+$MCS0 = $MCS0 * $K2 * $ON_CHROMATICITY;  =>           0
+$MCS1 = $MCS1 * $K2 * $ON_CHROMATICITY;  =>           0
+$MCS2 = $MCS2 * $K2 * $ON_CHROMATICITY;  =>          -0
+$MCS3 = $MCS3 * $K2 * $ON_CHROMATICITY;  =>           0
+$MCS4 = $MCS4 * $K2 * $ON_CHROMATICITY;  =>          -0
+$MCO0 = $MCO0 * $K3 * $ON_DA;  =>           0
+$MCO1 = $MCO1 * $K3 * $ON_DA;  =>-0.311568315
+$MCO2 = $MCO2 * $K3 * $ON_DA;  =>0.0445097592
+$MCO3 = $MCO3 * $K3 * $ON_DA;  =>-0.356078074
+
+$MC2WQ_A1=$MC2WQ_A1*$K1*$ON_COUPLING;  =>-0.316432148
+$MC2WS_B2=$MC2WS_B2*$K2*$ON_CHROMATICITY;  =>           0
+$MC2WO_B3=$MC2WO_B3*$K3*$ON_DA;  =>0.0445097592
+$MC1W2Q_A1=$MC1W2Q_A1*$K1*$ON_COUPLING;  => 0.667497215
+$MC1W2S_B2=$MC1W2S_B2*$K2*$ON_CHROMATICITY;  =>           0
+$MC1W2O_B3=$MC1W2O_B3*$K3*$ON_DA;  =>0.0445097592
+$MC2W2Q_A1=$MC2W2Q_A1*$K1*$ON_COUPLING;  =>-0.995252391
+$MC2W2S_B2=$MC2W2S_B2*$K2*$ON_CHROMATICITY;  =>           0
+$MC2W2O_B3=$MC2W2O_B3*$K3*$ON_DA;  =>0.0445097592
+$MC3W2Q_A1=$MC3W2Q_A1*$K1*$ON_COUPLING;  =>  1.02678775
+$MC3W2S_B2=$MC3W2S_B2*$K2*$ON_CHROMATICITY;  =>           0
+$MC3W2O_B3=$MC3W2O_B3*$K3*$ON_DA;  =>0.0445097592
+$MC4W2Q_A1=$MC4W2Q_A1*$K1*$ON_COUPLING;  =>  -4.6492675
+$MC4W2S_B2=$MC4W2S_B2*$K2*$ON_CHROMATICITY;  =>           0
+$MC4W2O_B3=$MC4W2O_B3*$K3*$ON_DA;  =>0.0445097592
+
+$MC30W2Q_A1=$MC30W2Q_A1*$K1*$ON_COUPLING;  =>  1.72147971
+$MC30W2S_B2=$MC30W2S_B2*$K2*$ON_CHROMATICITY;  =>           0
+$MC30W2O_B3=$MC30W2O_B3*$K3*$ON_DA;  =>0.0445097592
+$MC31W2Q_A1=$MC31W2Q_A1*$K1*$ON_COUPLING;  => -3.38108871
+$MC31W2S_B2=$MC31W2S_B2*$K2*$ON_CHROMATICITY;  =>           0
+$MC31W2O_B3=$MC31W2O_B3*$K3*$ON_DA;  =>0.0445097592
+$MC32W2Q_A1=$MC32W2Q_A1*$K1*$ON_COUPLING;  =>  2.47062235
+$MC32W2S_B2=$MC32W2S_B2*$K2*$ON_CHROMATICITY;  =>           0
+$MC32W2O_B3=$MC32W2O_B3*$K3*$ON_DA;  =>0.0445097592
+$MC33W2Q_A1=$MC33W2Q_A1*$K1*$ON_COUPLING;  => 0.221867711
+$MC33W2S_B2=$MC33W2S_B2*$K2*$ON_CHROMATICITY;  =>           0
+$MC33W2O_B3=$MC33W2O_B3*$K3*$ON_DA;  =>0.0445097592
+
+$MC1WQ_A1=$MC1WQ_A1*$K1*$ON_COUPLING;  => 0.480660579
+$MC1WS_B2=$MC1WS_B2*$K2*$ON_CHROMATICITY;  =>           0
+$MC1WO_B3=$MC1WO_B3*$K3*$ON_DA;  =>0.0445097592
+$MC2EQ_A1=$MC2EQ_A1*$K1*$ON_COUPLING;  =>-0.103757508
+$MC2ES_B2=$MC2ES_B2*$K2*$ON_CHROMATICITY;  =>           0
+$MC2EO_B3=$MC2EO_B3*$K3*$ON_DA;  =>0.0445097592
+$MC1E2Q_A1=$MC1E2Q_A1*$K1*$ON_COUPLING;  => 0.573123677
+$MC1E2S_B2=$MC1E2S_B2*$K2*$ON_CHROMATICITY;  =>           0
+$MC1E2O_B3=$MC1E2O_B3*$K3*$ON_DA;  =>0.0445097592
+$MC2E2Q_A1=$MC2E2Q_A1*$K1*$ON_COUPLING;  =>  2.33193442
+$MC2E2S_B2=$MC2E2S_B2*$K2*$ON_CHROMATICITY;  =>           0
+$MC2E2O_B3=$MC2E2O_B3*$K3*$ON_DA;  =>0.0445097592
+$MC3E2Q_A1=$MC3E2Q_A1*$K1*$ON_COUPLING;  => -2.36171352
+$MC3E2S_B2=$MC3E2S_B2*$K2*$ON_CHROMATICITY;  =>           0
+$MC3E2O_B3=$MC3E2O_B3*$K3*$ON_DA;  =>0.0445097592
+$MC4E2Q_A1=$MC4E2Q_A1*$K1*$ON_COUPLING;  => -3.57658214
+$MC4E2S_B2=$MC4E2S_B2*$K2*$ON_CHROMATICITY;  =>           0
+$MC4E2O_B3=$MC4E2O_B3*$K3*$ON_DA;  =>0.0445097592
+
+$MC30E2Q_A1=$MC30E2Q_A1*$K1*$ON_COUPLING;  =>  1.55531332
+$MC30E2S_B2=$MC30E2S_B2*$K2*$ON_CHROMATICITY;  =>           0
+$MC30E2O_B3=$MC30E2O_B3*$K3*$ON_DA;  =>0.0445097592
+$MC31E2Q_A1=$MC31E2Q_A1*$K1*$ON_COUPLING;  =>-0.00660178734
+$MC31E2S_B2=$MC31E2S_B2*$K2*$ON_CHROMATICITY;  =>           0
+$MC31E2O_B3=$MC31E2O_B3*$K3*$ON_DA;  =>0.0445097592
+$MC32E2Q_A1=$MC32E2Q_A1*$K1*$ON_COUPLING;  => 0.102755042
+$MC32E2S_B2=$MC32E2S_B2*$K2*$ON_CHROMATICITY;  =>           0
+$MC32E2O_B3=$MC32E2O_B3*$K3*$ON_DA;  =>0.0445097592
+$MC33E2Q_A1=$MC33E2Q_A1*$K1*$ON_COUPLING;  =>  1.20855553
+$MC33E2S_B2=$MC33E2S_B2*$K2*$ON_CHROMATICITY;  =>           0
+$MC33E2O_B3=$MC33E2O_B3*$K3*$ON_DA;  =>0.0445097592
+$MC1EQ_A1=$MC1EQ_A1*$K1*$ON_COUPLING;  =>-0.398815419
+$MC1ES_B2=$MC1ES_B2*$K2*$ON_CHROMATICITY;  =>           0
+$MC1EO_B3=$MC1EO_B3*$K3*$ON_DA;  =>0.0445097592
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Optic structure description
+$QFF6W="HQFF QFF6W HQFF";  =>HQFF QFF6W HQFF
+$QFF5W="HQFF QFF5W HQFF";  =>HQFF QFF5W HQFF
+$QFF4W="HQFF QFF4W HQFF";  =>HQFF QFF4W HQFF
+
+$Q1W2="HQ Q1W2 HQ";  =>HQ Q1W2 HQ
+$Q2W2="HQ Q2W2 HQ";  =>HQ Q2W2 HQ
+$Q3W2="HQ Q3W2 HQ";  =>HQ Q3W2 HQ
+$Q4W2="HQ Q4W2 HQ";  =>HQ Q4W2 HQ
+$Q5W2="HQ Q5W2 HQ";  =>HQ Q5W2 HQ
+$Q6W2="HQ Q6W2 HQ";  =>HQ Q6W2 HQ
+
+$Q30W2="HQ Q30W2 HQ";  =>HQ Q30W2 HQ
+$Q31W2="HQ Q31W2 HQ";  =>HQ Q31W2 HQ
+$Q32W2="HQ Q32W2 HQ";  =>HQ Q32W2 HQ
+$Q33W2="HQ Q33W2 HQ";  =>HQ Q33W2 HQ
+$Q34W2="HQ Q34W2 HQ";  =>HQ Q34W2 HQ
+$Q35W2="HQ Q35W2 HQ";  =>HQ Q35W2 HQ
+
+$QFF1W="HQFF QFF1W HQFF";  =>HQFF QFF1W HQFF
+$QFF2W="HQFF QFF2W HQFF";  =>HQFF QFF2W HQFF
+$QFF3W="HQFF QFF3W HQFF";  =>HQFF QFF3W HQFF
+# MPD(IP1)
+$QFF6E="HQFF QFF6E HQFF";  =>HQFF QFF6E HQFF
+$QFF5E="HQFF QFF5E HQFF";  =>HQFF QFF5E HQFF
+$QFF4E="HQFF QFF4E HQFF";  =>HQFF QFF4E HQFF
+
+$Q1E2="HQ Q1E2 HQ";  =>HQ Q1E2 HQ
+$Q2E2="HQ Q2E2 HQ";  =>HQ Q2E2 HQ
+$Q3E2="HQ Q3E2 HQ";  =>HQ Q3E2 HQ
+$Q4E2="HQ Q4E2 HQ";  =>HQ Q4E2 HQ
+$Q5E2="HQ Q5E2 HQ";  =>HQ Q5E2 HQ
+$Q6E2="HQ Q6E2 HQ";  =>HQ Q6E2 HQ
+
+$QD  = "HQ QD HQ";  =>HQ QD HQ
+$QDE1 = "HQ QDE1 HQ";  =>HQ QDE1 HQ
+$QF1 = "HQ QF1 HQ";  =>HQ QF1 HQ
+$QF2 = "HQ QF2 HQ";  =>HQ QF2 HQ
+$QFE1 = "HQ QFE1 HQ";  =>HQ QFE1 HQ
+$QFE2 = "HQ QFE2 HQ";  =>HQ QFE2 HQ
+
+$Q30E2="HQ Q30E2 HQ";  =>HQ Q30E2 HQ
+$Q31E2="HQ Q31E2 HQ";  =>HQ Q31E2 HQ
+$Q32E2="HQ Q32E2 HQ";  =>HQ Q32E2 HQ
+$Q33E2="HQ Q33E2 HQ";  =>HQ Q33E2 HQ
+$Q34E2="HQ Q34E2 HQ";  =>HQ Q34E2 HQ
+$Q35E2="HQ Q35E2 HQ";  =>HQ Q35E2 HQ
+
+$QFF3E="HQFF QFF3E HQFF";  =>HQFF QFF3E HQFF
+$QFF2E="HQFF QFF2E HQFF";  =>HQFF QFF2E HQFF
+$QFF1E="HQFF QFF1E HQFF";  =>HQFF QFF1E HQFF
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! End of optic structure description
+
+#---------------------------------------- Multipole corrector discription
+$MC2W="KX MC2WQ MCS0 MCO0";  =>KX MC2WQ MCS0 MCO0
+
+$MC1W2="KX MC1W2Q MCS0 MCO0";  =>KX MC1W2Q MCS0 MCO0
+$MC2W2="KX MC2W2Q MCS0 MCO1";  =>KX MC2W2Q MCS0 MCO1
+$MC3W2="KX MC3W2Q MCS0 MCO2";  =>KX MC3W2Q MCS0 MCO2
+$MC4W2="KX MC4W2Q MCS0 MCO3";  =>KX MC4W2Q MCS0 MCO3
+
+$MC0 = "KX MCQ MCS0 MCO0";  =>KX MCQ MCS0 MCO0
+$MC1 = "KX MCQ MCS1 MCO0";  =>KX MCQ MCS1 MCO0
+$MC2 = "KX MCQ MCS2 MCO0";  =>KX MCQ MCS2 MCO0
+$MC3 = "KX MCQ MCS3 MCO0";  =>KX MCQ MCS3 MCO0
+$MC4 = "KX MCQ MCS4 MCO0";  =>KX MCQ MCS4 MCO0
+
+$MC30W2="KX MC30W2Q MCS0 MCO3";  =>KX MC30W2Q MCS0 MCO3
+$MC31W2="KX MC31W2Q MCS0 MCO2";  =>KX MC31W2Q MCS0 MCO2
+$MC32W2="KX MC32W2Q MCS0 MCO1";  =>KX MC32W2Q MCS0 MCO1
+$MC33W2="KX MC33W2Q MCS0 MCO0";  =>KX MC33W2Q MCS0 MCO0
+
+$MC1E="KX MC1EQ MCS0 MCO0";  =>KX MC1EQ MCS0 MCO0
+$MC2E="KX MC2EQ MCS0 MCO0";  =>KX MC2EQ MCS0 MCO0
+
+$MC1E2="KX MC1E2Q MCS0 MCO0";  =>KX MC1E2Q MCS0 MCO0
+$MC2E2="KX MC2E2Q MCS0 MCO1";  =>KX MC2E2Q MCS0 MCO1
+$MC3E2="KX MC3E2Q MCS0 MCO2";  =>KX MC3E2Q MCS0 MCO2
+$MC4E2="KX MC4E2Q MCS0 MCO3";  =>KX MC4E2Q MCS0 MCO3
+
+$MC30E2="KX MC30E2Q MCS0 MCO3";  =>KX MC30E2Q MCS0 MCO3
+$MC31E2="KX MC31E2Q MCS0 MCO2";  =>KX MC31E2Q MCS0 MCO2
+$MC32E2="KX MC32E2Q MCS0 MCO1";  =>KX MC32E2Q MCS0 MCO1
+$MC33E2="KX MC33E2Q MCS0 MCO0";  =>KX MC33E2Q MCS0 MCO0
+
+$MC1W="KX MC1WQ MCS0 MCO0";  =>KX MC1WQ MCS0 MCO0
+#---------------------------------- End of multipole corrector discription
+
+#-------------------------------- Main dipole structure
+$BM="MB2L HD G BH G HD MB2L";  =>MB2L HD G BH G HD MB2L
+
+#------------------------------------- 1st and 2nd BV magnets
+$BV1 = "H_BV1 BV1 H_BV1";  =>H_BV1 BV1 H_BV1
+$BV2 = "H_BV2 BV2 H_BV2";  =>H_BV2 BV2 H_BV2
+
+OptiM
+Energy[MeV]=11221.519   Mass[MeV]=2322.8396 
+Emittance: ex[cm]=0.00396  ey[cm]=0.0031  DP/P=0.00936 
+Initial:	BetaX[cm]=60.1377 	BetaY[cm]=59.907 
+	AlfaX=0.000375956 	AlfaY=0.00030036  Qx=0  Qy=0
+	DispersX[cm]=0.0986896 	DispersY[cm]=-3.79179 
+	Dsp_PrimeX=-0.00431682 	DspPrimeY=-0.00158551 
+	X[cm]=0.000    	Y[cm]=0.000    	Z[cm]=0.000    	S[cm]=0.000    
+	tetaX[deg]=0        	tetaY[deg]=0        
+
+begin lattice. Number of periods=1 
+
+# SPD(IP2)
+
+# Straight section SSB1
+C_SPD $QFF6W OO1 $QFF5W OO2 $QFF4W OQ2 $MC2W OQ0 $BV1 OBV12 $BV2 OQ1 $MC1W2 OQ3 OSW1 ARF3W21 OSW1 OQ1 OMC OQ4 OSW2 $Q1W2 OQ1 $MC2W2 OQ1 $Q2W2 OQ5 $Q3W2 OQ1 $MC3W2 OQ1 $Q4W2 OSW3 ARF3W22 ARF3W22 OSW3 $Q5W2 OQ1 $MC4W2 OQ6 $Q6W2
+# End of straight section SSB1
+
+# West arc
+OQLBMD $BM OBMBM $BM OBMMC $MC0 OMCQL $QFE2 OMISS1 $MC0 OMCQL $QD $QD
+OMISS2 $MC0 OMCQL $QFE1 OQLBM $BM OBMBM $BM OBMMC $MC0 OMCQL $QD $QD
+OQLBM $BM OBMBM $BM OBMMC $MC1 OMCQL $QF2 OQLBM $BM OBMBM $BM OBMMC $MC2 OMCQL $QD $QD
+
+OQLBM $BM OBMBM $BM OBMMC $MC3 OMCQL $QF2 OQLBM $BM OBMBM $BM OBMMC $MC4 OMCQL $QD $QD
+OQLBM $BM OBMBM $BM OBMMC $MC1 OMCQL $QF1 OQLBM $BM OBMBM $BM OBMMC $MC2 OMCQL $QD $QD
+OQLBM $BM OBMBM $BM OBMMC $MC3 OMCQL $QF2 OQLBM $BM OBMBM $BM OBMMC $MC4 OMCQL $QD $QD
+
+OQLBM $BM OBMBM $BM OBMMC $MC1 OMCQL $QF2 OQLBM $BM OBMBM $BM OBMMC $MC2 OMCQL $QD $QD
+OQLBM $BM OBMBM $BM OBMMC $MC3 OMCQL $QF1 OQLBM $BM OBMBM $BM OBMMC $MC4 OMCQL $QD $QD
+OQLBM $BM OBMBM $BM OBMMC $MC1 OMCQL $QF2 OQLBM $BM OBMBM $BM OBMMC $MC2 OMCQL $QD $QD
+
+OQLBM $BM OBMBM $BM OBMMC $MC3 OMCQL $QF2 OQLBM $BM OBMBM $BM OBMMC $MC4 OMCQL $QD $QD
+OQLBM $BM OBMBM $BM OBMMC $MC0 OMCQL $QFE1 OMISS3 $MC0 OMCQL $QD $QD 
+OMISS4 $MC0 OMCQL $QFE2 OQLBM $BM OBMBM $BM OBMMCOMCOMCQL
+# End of west arc
+
+# Straight section SSA2
+$Q30W2 OQ6 $MC30W2 OQ1 $Q31W2 ONW3 C_EC ONW3 $Q32W2 OQ1 $MC31W2 OQ1 $Q33W2 OQ5 $Q34W2 OQ1 $MC32W2 OQ1 $Q35W2 ONW2 OQ4 OMC OQ1 ONW1 OQ3 $MC33W2 OQ1 $BV2 OBV12 $BV1 OQ0 $MC1W OQ2 $QFF3W OO2 $QFF2W OO1 $QFF1W C_MPD
+# End of straight section SSA2
+
+# MPD(IP1)
+
+# Straight section SSA1
+C_MPD $QFF6E OO1 $QFF5E OO2 $QFF4E OQ2 $MC2E OQ0 $BV1 OBV12 $BV2 OQ1 $MC1E2 OQ3 ONE1 OQ1 OMC OQ4 ONE2 $Q1E2 OQ1 $MC2E2 OQ1 $Q2E2 OQ5 $Q3E2 OQ1 $MC3E2 OQ1 $Q4E2 ONE3 ARF3W25 ARF3W25 ARF3W25 ARF3W25 ARF3W25 ONE3 $Q5E2 OQ1 $MC4E2 OQ6 $Q6E2
+# End of straight section SSA1
+
+# East arc
+OQLBMD $BM OBMBM $BM OBMMC $MC0 OMCQL $QFE2 OQLKM1 OKM1 OKM1MC $MC0 OMCQL $QD $QD
+OQLSM1 OSM1 OSM1MC $MC0 OMCQL $QFE1 OQLBM $BM OBMBM $BM OBMMC $MC0 OMCQL $QD $QD
+OQLBM $BM OBMBM $BM OBMMC $MC1 OMCQL $QF2 OQLBM $BM OBMBM $BM OBMMC $MC2 OMCQL $QD $QD
+
+OQLBM $BM OBMBM $BM OBMMC $MC3 OMCQL $QF2 OQLBM $BM OBMBM $BM OBMMC $MC4 OMCQL $QD $QD
+OQLBM $BM OBMBM $BM OBMMC $MC1 OMCQL $QF1 OQLBM $BM OBMBM $BM OBMMC $MC2 OMCQL $QD $QD
+OQLBM $BM OBMBM $BM OBMMC $MC3 OMCQL $QF2 OQLBM $BM OBMBM $BM OBMMC $MC4 OMCQL $QD $QD
+
+OQLBM $BM OBMBM $BM OBMMC $MC1 OMCQL $QF2 OQLBM $BM OBMBM $BM OBMMC $MC2 OMCQL $QD $QD
+OQLBM $BM OBMBM $BM OBMMC $MC3 OMCQL $QF1 OQLBM $BM OBMBM $BM OBMMC $MC4 OMCQL $QD $QD
+OQLBM $BM OBMBM $BM OBMMC $MC1 OMCQL $QF2 OQLBM $BM OBMBM $BM OBMMC $MC2 OMCQL $QD $QD
+
+OQLBM $BM OBMBM $BM OBMMC $MC3 OMCQL $QF2 OQLBM $BM OBMBM $BM OBMMC $MC4 OMCQL $QD $QD
+OQLBM $BM OBMBM $BM OBMMC $MC0 OMCQL $QFE1 OQLSM2 OSM2 OSM2MC $MC0 OMCQL $QD $QD 
+OQLKM2 OKM2 OKM2MC $MC0 OMCQL $QFE2 OQLBM $BM OBMBM $BM OBMMCOMCOMCQL
+# End of east arc
+
+# Straight section SSB2
+$Q30E2 OQ6 $MC30E2 OQ1 $Q31E2 OSE3 $Q32E2 OQ1 $MC31E2 OQ1 $Q33E2 OQ5 $Q34E2 OQ1 $MC32E2 OQ1 $Q35E2 OSE2 OQ4 OMC OQ1 OSE1 OQ3 $MC33E2 OQ1 $BV2 OBV12 $BV1 OQ0 $MC1E OQ2 $QFF3E OO2 $QFF2E OO1 $QFF1E C_SPD
+# End of straight section SSB2
+
+end lattice
+
+begin list
+
+# -----------------------------------------------------Main dipole
+HD 	Ax[cm]=6 	Ay[cm]=3.5 	Shape=1 	OffsetX[cm]=0 	OffsetY[cm]=0 	Tilt[deg]=0
+MB2L Order:m=2   Bm*L[kG/cm^(m-1)]=0   Tilt[deg]=0
+G 	B[kG]=18.019527   Angle[deg]=2.25  EffLen[cm]=3.6  Tilt[deg]=0  
+BH 	L[cm]=194        	B[kG]=18.019527   	G[kG/cm]=0        	Tilt[deg]=0
+
+# ------------------------------Drifts in arcs
+OQLBM 	L[cm]=66.5     
+OBMBM 	L[cm]=30       
+OBMMC 	L[cm]=28.9     
+OMCQL 	L[cm]=7.6      
+OKM1 	L[cm]=450      
+OSM1 	L[cm]=250      
+OKM1MC 	L[cm]=12.9     
+OSM1MC 	L[cm]=213.4    
+OSM2 	L[cm]=250      
+OKM2 	L[cm]=450      
+OSM2MC 	L[cm]=12.4     
+OKM2MC 	L[cm]=12.9     
+
+# -------------------Drift between 1st and 2nd BV magnets
+OBV12 	L[cm]=252.30148 
+
+# ----------------------------------drifts in straight section
+OSW3 	L[cm]=456.75   
+OSW2 	L[cm]=810      
+OSW1 	L[cm]=398.475  
+OSE3 	L[cm]=1300     
+OSE2 	L[cm]=810      
+OSE1 	L[cm]=1005.45  
+ONE3 	L[cm]=189.75   
+ONE2 	L[cm]=810      
+ONE1 	L[cm]=1005.45  
+ONW3 	L[cm]=350      
+ONW2 	L[cm]=810      
+ONW1 	L[cm]=1005.45  
+
+# ------------------------------------Drifts in straight sections: SSB1, SSA2, SSA1 and SSB2
+OO1 	L[cm]=31.5     
+OO2 	L[cm]=73.5     
+OQ0 	L[cm]=20       
+OQ1 	L[cm]=10       
+OQ2 	L[cm]=10       
+OQ3 	L[cm]=18.461519 
+OQ4 	L[cm]=154      
+OQ5 	L[cm]=41.3     
+OQ6 	L[cm]=13.587   
+OMC 	L[cm]=30       
+
+# --------------------------Drifts in arcs
+OQLBMD 	L[cm]=21.5     
+OBMMCOMCOMCQL 	L[cm]=21.5     
+OMISS1 	L[cm]=522.9    
+OMISS2 	L[cm]=515.4    
+OMISS3 	L[cm]=515.4    
+OMISS4 	L[cm]=522.9    
+OQLKM1 	L[cm]=60       
+OQLSM1 	L[cm]=52       
+OQLSM2 	L[cm]=253      
+OQLKM2 	L[cm]=60       
+
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--------------------------Optics
+H_BV1 	Ax[cm]=8 	Ay[cm]=8 	Shape=1 	OffsetX[cm]=0 	OffsetY[cm]=0 	Tilt[deg]=0
+H_BV2 	Ax[cm]=5 	Ay[cm]=5.5 	Shape=1 	OffsetX[cm]=0 	OffsetY[cm]=0 	Tilt[deg]=0
+
+BV1 	L[cm]=138        	B[kG]=-13.225014   	G[kG/cm]=0        	Tilt[deg]=90
+BV2 	L[cm]=138        	B[kG]=13.225014   	G[kG/cm]=0        	Tilt[deg]=90
+
+HQ 	Ax[cm]=4.5 	Ay[cm]=4.5 	Shape=1 	OffsetX[cm]=0 	OffsetY[cm]=0 	Tilt[deg]=0
+HQFF 	Ax[cm]=9 	Ay[cm]=9 	Shape=1 	OffsetX[cm]=0 	OffsetY[cm]=0 	Tilt[deg]=0
+
+QFF6W 	L[cm]=95         	G[kG/cm]=-1.918394 	Tilt[deg]=0
+QFF5W 	L[cm]=142        	G[kG/cm]=1.921521 	Tilt[deg]=0
+QFF4W 	L[cm]=68         	G[kG/cm]=-1.922331 	Tilt[deg]=0
+
+
+Q1W2 	L[cm]=54         	G[kG/cm]=-2.299182 	Tilt[deg]=0
+Q2W2 	L[cm]=57.5       	G[kG/cm]=2.27995 	Tilt[deg]=0
+Q3W2 	L[cm]=57.5       	G[kG/cm]=2.293021 	Tilt[deg]=0
+Q4W2 	L[cm]=67.7       	G[kG/cm]=-2.271717 	Tilt[deg]=0
+Q5W2 	L[cm]=67.7       	G[kG/cm]=2.309355 	Tilt[deg]=0
+Q6W2 	L[cm]=78         	G[kG/cm]=-2.306078 	Tilt[deg]=0
+
+QD 	L[cm]=23.5       	G[kG/cm]=-2.242009 	Tilt[deg]=0
+QF2 	L[cm]=47         	G[kG/cm]=2.291529 	Tilt[deg]=0
+QF1 	L[cm]=47         	G[kG/cm]=2.291529 	Tilt[deg]=0
+QFE1 	L[cm]=45         	G[kG/cm]=2.300042 	Tilt[deg]=0
+QFE2 	L[cm]=37.5       	G[kG/cm]=2.301508 	Tilt[deg]=0
+
+Q30W2 	L[cm]=78         	G[kG/cm]=-2.305313 	Tilt[deg]=0
+Q31W2 	L[cm]=67.7       	G[kG/cm]=2.309624 	Tilt[deg]=0
+Q32W2 	L[cm]=67.7       	G[kG/cm]=-2.270751 	Tilt[deg]=0
+Q33W2 	L[cm]=57.5       	G[kG/cm]=2.291745 	Tilt[deg]=0
+Q34W2 	L[cm]=57.5       	G[kG/cm]=2.282731 	Tilt[deg]=0
+Q35W2 	L[cm]=54         	G[kG/cm]=-2.301148 	Tilt[deg]=0
+
+QFF3W 	L[cm]=68         	G[kG/cm]=1.922477 	Tilt[deg]=0
+QFF2W 	L[cm]=142        	G[kG/cm]=-1.921668 	Tilt[deg]=0
+QFF1W 	L[cm]=95         	G[kG/cm]=1.918529 	Tilt[deg]=0
+# MPD(IP1)
+QFF6E 	L[cm]=95         	G[kG/cm]=-1.918397 	Tilt[deg]=0
+QFF5E 	L[cm]=142        	G[kG/cm]=1.921414 	Tilt[deg]=0
+QFF4E 	L[cm]=68         	G[kG/cm]=-1.921963 	Tilt[deg]=0
+
+Q1E2 	L[cm]=54         	G[kG/cm]=-2.298433 	Tilt[deg]=0
+Q2E2 	L[cm]=57.5       	G[kG/cm]=2.279226 	Tilt[deg]=0
+Q3E2 	L[cm]=57.5       	G[kG/cm]=2.293468 	Tilt[deg]=0
+Q4E2 	L[cm]=67.7       	G[kG/cm]=-2.271668 	Tilt[deg]=0
+Q5E2 	L[cm]=67.7       	G[kG/cm]=2.306954 	Tilt[deg]=0
+Q6E2 	L[cm]=78         	G[kG/cm]=-2.304178 	Tilt[deg]=0
+
+Q30E2 	L[cm]=78         	G[kG/cm]=-2.306078 	Tilt[deg]=0
+Q31E2 	L[cm]=67.7       	G[kG/cm]=2.309355 	Tilt[deg]=0
+Q32E2 	L[cm]=67.7       	G[kG/cm]=-2.271717 	Tilt[deg]=0
+Q33E2 	L[cm]=57.5       	G[kG/cm]=2.293021 	Tilt[deg]=0
+Q34E2 	L[cm]=57.5       	G[kG/cm]=2.27995 	Tilt[deg]=0
+Q35E2 	L[cm]=54         	G[kG/cm]=-2.299182 	Tilt[deg]=0
+
+QFF3E 	L[cm]=68         	G[kG/cm]=1.922331 	Tilt[deg]=0
+QFF2E 	L[cm]=142        	G[kG/cm]=-1.921521 	Tilt[deg]=0
+QFF1E 	L[cm]=95         	G[kG/cm]=1.918394 	Tilt[deg]=0
+# End of optic
+
+# Sets of the monitors
+# Sets of the kickers
+
+KX 	L[cm]=30         	B[kG]=0   	Tilt[deg]=0
+
+# Sets of the multipole correctors
+
+# !!!---correctors in arc---!!!
+
+MCQ Order:m=1   Bm*L[kG/cm^(m-1)]=0   Tilt[deg]=0
+MCS0 Order:m=2   Bm*L[kG/cm^(m-1)]=0   Tilt[deg]=0
+MCS1 Order:m=2   Bm*L[kG/cm^(m-1)]=0   Tilt[deg]=0
+MCS2 Order:m=2   Bm*L[kG/cm^(m-1)]=-0   Tilt[deg]=0
+MCS3 Order:m=2   Bm*L[kG/cm^(m-1)]=0   Tilt[deg]=0
+MCS4 Order:m=2   Bm*L[kG/cm^(m-1)]=-0   Tilt[deg]=0
+MCO0 Order:m=3   Bm*L[kG/cm^(m-1)]=0   Tilt[deg]=0
+MCO1 Order:m=3   Bm*L[kG/cm^(m-1)]=-0.311568   Tilt[deg]=0
+MCO2 Order:m=3   Bm*L[kG/cm^(m-1)]=0.0445098   Tilt[deg]=0
+MCO3 Order:m=3   Bm*L[kG/cm^(m-1)]=-0.356078   Tilt[deg]=0
+
+# !!!---correctors in arc---!!!
+
+MC2WQ Order:m=1   Bm*L[kG/cm^(m-1)]=-0.316432   Tilt[deg]=45
+MC1W2Q Order:m=1   Bm*L[kG/cm^(m-1)]=0.667497   Tilt[deg]=45
+MC2W2Q Order:m=1   Bm*L[kG/cm^(m-1)]=-0.995252   Tilt[deg]=45
+MC3W2Q Order:m=1   Bm*L[kG/cm^(m-1)]=1.02679   Tilt[deg]=45
+MC4W2Q Order:m=1   Bm*L[kG/cm^(m-1)]=-4.64927   Tilt[deg]=45
+
+MC30W2Q Order:m=1   Bm*L[kG/cm^(m-1)]=1.72148   Tilt[deg]=45
+MC31W2Q Order:m=1   Bm*L[kG/cm^(m-1)]=-3.38109   Tilt[deg]=45
+MC32W2Q Order:m=1   Bm*L[kG/cm^(m-1)]=2.47062   Tilt[deg]=45
+MC33W2Q Order:m=1   Bm*L[kG/cm^(m-1)]=0.221868   Tilt[deg]=45
+MC1WQ Order:m=1   Bm*L[kG/cm^(m-1)]=0.480661   Tilt[deg]=45
+
+MC2EQ Order:m=1   Bm*L[kG/cm^(m-1)]=-0.103758   Tilt[deg]=45
+MC1E2Q Order:m=1   Bm*L[kG/cm^(m-1)]=0.573124   Tilt[deg]=45
+MC2E2Q Order:m=1   Bm*L[kG/cm^(m-1)]=2.33193   Tilt[deg]=45
+MC3E2Q Order:m=1   Bm*L[kG/cm^(m-1)]=-2.36171   Tilt[deg]=45
+MC4E2Q Order:m=1   Bm*L[kG/cm^(m-1)]=-3.57658   Tilt[deg]=45
+
+MC30E2Q Order:m=1   Bm*L[kG/cm^(m-1)]=1.55531   Tilt[deg]=45
+MC31E2Q Order:m=1   Bm*L[kG/cm^(m-1)]=-0.00660179   Tilt[deg]=45
+MC32E2Q Order:m=1   Bm*L[kG/cm^(m-1)]=0.102755   Tilt[deg]=45
+MC33E2Q Order:m=1   Bm*L[kG/cm^(m-1)]=1.20856   Tilt[deg]=45
+MC1EQ Order:m=1   Bm*L[kG/cm^(m-1)]=-0.398815   Tilt[deg]=45
+
+# MPD, SPD and EC solenoids
+C_MPD 	L[cm]=525        	B[kG]=5          	Aperture[cm]=0       
+C_SPD 	L[cm]=525        	B[kG]=0          	Aperture[cm]=0       
+C_EC 	L[cm]=600        	B[kG]=2          	Aperture[cm]=0       
+
+# RF-3 cavities
+ARF3W21 	L[cm]=208.5     Ncell=1  Eff_L[cm]=208.5  A[MeV]=0         Phase[deg]=-90  WaveL[cm]=773.644
+ARF3W22 	L[cm]=193.25    Ncell=1  Eff_L[cm]=193.25  A[MeV]=0         Phase[deg]=-90  WaveL[cm]=773.644
+ARF3W25 	L[cm]=184.1     Ncell=1  Eff_L[cm]=184.1  A[MeV]=0         Phase[deg]=-90  WaveL[cm]=773.644
+
+end list of elements
